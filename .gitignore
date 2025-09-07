@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs and editors
+/.idea
+/.vscode
+.project
+.classpath
+*.launch
+.settings/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Sphinx
+_autodoc/
+_build/
+docs/_build/
+docs/_templates/
+*.doctree
+*.pickle
+
+# Sphinx caches
+docs/.doctrees
+docs/.sphinx
+
+# OS / Editor files
+*.DS_Store
+*.swp
+*.swo
