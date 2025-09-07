@@ -20,14 +20,17 @@ RUN apt-get update && apt-get install -y \
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Install Python extension
-RUN code-server --install-extension ms-python.python
+RUN code-server --install-extension ms-python.python && \
+    code-server --install-extension lextudio.restructuredtext && \
+    code-server --install-extension trond-snekvik.simple-rst
 
 # Install Jupyter extensions for VS Code integration + Sphinx toolchain
 RUN pip install --no-cache-dir \
     jupyter-server-proxy \
     jupyter-vscode-proxy \
     sphinx \
-    sphinx-revealjs
+    sphinx-revealjs \
+    esbonio
 
 # Expose port for Jupyter
 EXPOSE 8888

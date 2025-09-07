@@ -19,6 +19,7 @@ Thumbs.db
 _autodoc/
 _build/
 docs/_build/
+build/
 docs/_templates/
 *.doctree
 *.pickle
