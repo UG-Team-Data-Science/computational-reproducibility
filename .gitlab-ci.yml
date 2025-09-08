@@ -11,7 +11,8 @@ pages:
     # Build reveal.js slides in docs/
     - make -C docs revealjs
     # Move Sphinx build output to GitLab Pages' expected location
-    - mv docs/build/revealjs/* public
+    - mkdir -p public
+    - cp docs/build/revealjs/* public
   artifacts:
     paths:
       - public
