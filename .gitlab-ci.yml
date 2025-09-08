@@ -7,11 +7,12 @@ pages:
   script:
     # Build reveal.js slides in docs/
     - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
-    - rm -rf public
-    - make -C docs revealjs
+      # - rm -rf public
+      # - make -C docs revealjs
+    - sphinx-build -b revealjs docs/build public
     # Move Sphinx build output to GitLab Pages' expected location
-    - mkdir -p public
-    - cp -r  docs/build/revealjs/* public
+    # - mkdir -p public
+    # - cp -r  docs/build/revealjs/* public
   artifacts:
     paths:
       - public
