@@ -1,4 +1,4 @@
-[![pages status](https://gitrepo.service.rug.nl/computational-reproducibility/dcc-training/badges/main/pipeline.svg?job=pages)](https://gitrepo.service.rug.nl/computational-reproducibility/dcc-training/-/commits/main)
+[![pages status](https://gitrepo.service.rug.nl/dcc-training/computational-reproducibility/badges/main/pipeline.svg?job=pages)](https://gitrepo.service.rug.nl/computational-reproducibility/dcc-training/-/commits/main)
 
 # Reproducible Research: a computational approach
 
