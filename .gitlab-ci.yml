@@ -9,7 +9,7 @@ pages:
     - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
       # - rm -rf public
       # - make -C docs revealjs
-    - sphinx-build -b revealjs docs/source public
+    - sphinx-build -b html docs/source public
     # Move Sphinx build output to GitLab Pages' expected location
     # - mkdir -p public
     # - cp -r  docs/build/revealjs/* public
