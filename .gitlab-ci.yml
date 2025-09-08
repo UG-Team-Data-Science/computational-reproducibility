@@ -1,0 +1,19 @@
+image: python:3.11
+
+pages:
+  stage: deploy
+  before_script:
+    # Install build dependencies
+    - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
+    # Ensure build directory is clean
+    - rm -rf public
+  script:
+    # Build reveal.js slides in docs/
+    - make -C docs revealjs
+    # Move Sphinx build output to GitLab Pages' expected location
+    - mv docs/build/revealjs public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main   # or 'master', depending on your default branch
