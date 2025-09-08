@@ -12,7 +12,7 @@ pages:
     - make -C docs revealjs
     # Move Sphinx build output to GitLab Pages' expected location
     - mkdir -p public
-    - cp docs/build/revealjs/* public
+    - cp -r  docs/build/revealjs/* public
   artifacts:
     paths:
       - public
