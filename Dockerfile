@@ -13,8 +13,39 @@ RUN apt-get update && apt-get install -y \
     texlive-latex-recommended \
     texlive-latex-extra \
     texlive-fonts-recommended \
+    tex-gyre \
     latexmk \
+    fonts-liberation \
+    libnss3 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libx11-xcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxrandr2 \
+    libasound2 \
+    libpangocairo-1.0-0 \
+    libpango-1.0-0 \
+    libcups2 \
+    libdbus-1-3 \
+    libxss1 \
+    libgtk-3-0 \
+    libgbm1 \
  && rm -rf /var/lib/apt/lists/*
+
+ # Download Chromium .deb (for Ubuntu 22.04)
+RUN curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+ && apt-get update && apt-get install -y ./google-chrome-stable_current_amd64.deb \
+ && rm google-chrome-stable_current_amd64.deb
+
+# Let Puppeteer know where Chromium is
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+# Disable sandbox for Puppeteer/Decktape
+ENV PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
+
+ # Install Decktape for PDF export
+RUN npm install -g decktape
 
 # Install code-server (VS Code in browser)
 RUN curl -fsSL https://code-server.dev/install.sh | sh
@@ -30,7 +61,8 @@ RUN pip install --no-cache-dir \
     jupyter-vscode-proxy \
     sphinx \
     sphinx-revealjs \
-    esbonio
+    esbonio \
+    sphinx-autobuild
 
 # Expose port for Jupyter
 EXPOSE 8888

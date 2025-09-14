@@ -22,7 +22,19 @@ Within a particular ecosystem, there may be a common way of installing things, s
 docker build -t jupyter-vscode:1.0 .
 ```
 
+or 
+
+```bash
+docker build --network=host -t jupyter-vscode:1.0 .
+```
+
 ### Run the container
+
+```bash
+docker run -it --rm -p 8888:8888 -v "${PWD}":/home/jovyan jupyter-vscode:1.0
+```
+
+or
 
 ```bash
 docker run -it --rm \
@@ -38,7 +50,33 @@ docker run -it --rm \
 ```
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+
+Visit the link provided in the terminal
+```bash
+...
+        http://127.0.0.1:8888/lab?token=9cc59e2fa3b64f29d857332aa41cc5fc3463b8319b513406
+```
+Click on `VS Code`.
+
+### Build documentation
+
+Open a terminal `Menu->Terminal->New Terminal` and move to the `docs` folder
+```bash
+  cd docs
+```
+Build the html slides
+```bash
+  make revealjs
+```
+Build the pdf slides (make sure you run the above command)
+```bash
+  make pdfslides
+```
+Rebuild automatically (useful during continuous file changes)
+```bash
+  make autobuild
+```
+and follow the link on the terminal `ctrl + click`
 
 ## Support
 Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.

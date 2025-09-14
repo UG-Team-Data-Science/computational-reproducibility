@@ -3,13 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Reproducible Research: 
-======================
-A computational approach 
+Reproducible Research 
+=====================
 
+A computational approach
 
-:Based version: 3.2.0
-:Updated: 2025-10-18 JST
+January 2026
 
 Content
 =======

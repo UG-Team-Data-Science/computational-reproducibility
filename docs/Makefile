@@ -17,6 +17,17 @@ revealjs:
 	@echo
 	@echo "Build finished. The Reveal.js presentation is in $(BUILDDIR)/revealjs."
 
+autobuild:
+	sphinx-autobuild -b revealjs $(SOURCEDIR) $(BUILDDIR)/revealjs
+	@echo
+	@echo "Live server started. Open http://127.0.0.1:8000/ to view your Reveal.js presentation."
+
+
+pdfslides:
+	mkdir -p $(BUILDDIR)/latex
+	decktape reveal $(BUILDDIR)/revealjs/index.html $(BUILDDIR)/latex/slides.pdf --chrome-arg="--no-sandbox"
+	@echo
+	@echo "Build finished. The pdf slides are in $(BUILDDIR)/latex/slides.pdf."
 
 .PHONY: help Makefile
 

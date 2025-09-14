@@ -37,6 +37,15 @@ revealjs_css_files = [
     "custom.css",
 ]
 
+revealjs_script_conf = {
+    "hash": True,
+    "width": 1280,
+    "height": 720,
+    "margin": 0.04,   # optional, space around the slides
+    "minScale": 0.2,
+    "maxScale": 2.0,
+}
+
 # revealjs_css_files = [
 #     "revealjs/plugin/highlight/zenburn.css",
 #     "https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css",
