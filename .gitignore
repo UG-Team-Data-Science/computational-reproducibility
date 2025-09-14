@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.cache/
+.config/
+.jupyter/
+.local/
+.npm/
+.pki/
+
 # IDEs and editors
 /.idea
 /.vscode
