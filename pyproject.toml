@@ -13,9 +13,6 @@ authors = [
   {name = "Venustiano Soancatl Aguilar", email = "v.soancatl.aguilar@rug.nl"},
 ]
 
-[tool.setuptools.packages.find]
-where = ["jupyter_vscode_proxy"]
-
 [project.urls]
 repository = "https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility"
 
