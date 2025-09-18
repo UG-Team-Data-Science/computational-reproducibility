@@ -18,3 +18,15 @@ repository = "https://gitrepo.service.rug.nl/dcc/training/computational-reproduc
 
 [project.entry-points.jupyter_serverproxy_servers]
 vscode = "jupyter_vscode_proxy:setup_vscode"
+
+[tool.black]
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.venv
+  | build
+  | dist
+  | docker
+)/
+'''
