@@ -8,7 +8,7 @@ version_scheme = "post-release"
 name = "computational_reproducibility"
 description = "Environment for VS Code and Sphinx"
 readme = "README.md"
-dynamic = ["Draft Sept 2025"]
+dynamic = ["version"]
 authors = [
   {name = "Venustiano Soancatl Aguilar", email = "v.soancatl.aguilar@rug.nl"},
 ]
