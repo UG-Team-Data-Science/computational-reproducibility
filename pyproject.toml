@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm", "wheel"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+
+[project]
+name = "computational_reproducibility"
+description = "Environment for VS Code and Sphinx"
+readme = "README.md"
+dynamic = ["Draft Sept 2025"]
+authors = [
+  {name = "Venustiano Soancatl Aguilar", email = "v.soancatl.aguilar@rug.nl"},
+]
+
+[project.urls]
+repository = "https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility"
+
+[project.entry-points.jupyter_serverproxy_servers]
+vscode = "jupyter_vscode_proxy:setup_vscode"
