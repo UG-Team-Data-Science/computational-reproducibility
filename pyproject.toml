@@ -5,7 +5,7 @@ requires = ["setuptools", "setuptools-scm", "wheel"]
 version_scheme = "post-release"
 
 [project]
-name = "jupyter_vs_code_proxy"
+name = "jupyter_vscode_proxy"
 description = "Environment for VS Code and Sphinx"
 readme = "README.md"
 version = "0.0.1"
@@ -14,7 +14,7 @@ authors = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["jupyter_vs_code_proxy"]
+where = ["jupyter_vscode_proxy"]
 
 [project.urls]
 repository = "https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility"
