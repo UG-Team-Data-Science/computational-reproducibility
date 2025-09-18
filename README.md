@@ -19,6 +19,7 @@ Within a particular ecosystem, there may be a common way of installing things, s
 ### Build the docker container
 
 ```bash
+cd docker
 docker build -t jupyter-vscode:1.0 .
 ```
 
