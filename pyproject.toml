@@ -16,9 +16,6 @@ authors = [
 [tool.setuptools.packages.find]
 where = ["jupyter_vs_code_proxy"]
 
-[tool.setuptools]
-py-modules = ["jupyter_vs_code_proxy"]
-
 [project.urls]
 repository = "https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility"
 
