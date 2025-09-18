@@ -13,9 +13,6 @@ authors = [
   {name = "Venustiano Soancatl Aguilar", email = "v.soancatl.aguilar@rug.nl"},
 ]
 
-[tool.setuptools]
-packages = ["jupyter_vs_code_proxy"]
-
 [tool.setuptools.packages.find]
 where = ["jupyter_vs_code_proxy"]
 
