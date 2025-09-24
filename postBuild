@@ -4,12 +4,14 @@ code-server --install-extension ms-python.python
 code-server --install-extension lextudio.restructuredtext
 code-server --install-extension trond-snekvik.simple-rst
 
-curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
- && apt-get update && apt-get install -y ./google-chrome-stable_current_amd64.deb \
- && rm google-chrome-stable_current_amd64.deb
+# curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+#  && apt-get update && apt-get install -y ./google-chrome-stable_current_amd64.deb \
+#  && rm google-chrome-stable_current_amd64.deb
 
 # Let Puppeteer know where Chromium is
-export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+# export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
 # Disable sandbox for Puppeteer/Decktape
 export PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
 

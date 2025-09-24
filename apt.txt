@@ -2,6 +2,7 @@
     git
     nodejs
     npm
+    chromium-browser
     texlive-latex-recommended
     texlive-latex-extra
     texlive-fonts-recommended
