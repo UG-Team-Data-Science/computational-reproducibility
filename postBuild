@@ -6,7 +6,7 @@ code-server --install-extension trond-snekvik.simple-rst
 
 npx puppeteer install chrome
 
-echo 'export PUPPETEER_EXECUTABLE_PATH=$(find $HOME/.cache/puppeteer/chrome/ -name chrome | head -n1)' >> ~/.bashrc
+echo 'export PUPPETEER_EXECUTABLE_PATH=$(find $HOME/.cache/puppeteer/chrome/linux-* -name chrome | head -n1)' >> ~/.bashrc
 echo 'export PUPPETEER_SKIP_DOWNLOAD=true' >> ~/.bashrc
 
 # Disable sandbox for Puppeteer/Decktape
