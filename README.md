@@ -11,7 +11,7 @@ Let people know what your project can do specifically. Provide context and add a
 
 ## Test the environment in Binder
 
-Binder is a playground environment where you can test the environment and code. All the changes will dissapear when the Tabs are closed.
+Binder is a playground environment where you can test the environment and code. All the changes will dissappear when the Tabs are closed.
 
 1. Right click on the Binder badge below and then `Open Link in New Tab`
 
