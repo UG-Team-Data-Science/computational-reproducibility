@@ -1,4 +1,4 @@
-    curl \
+    curl
     git
     nodejs
     npm
