@@ -10,10 +10,15 @@ code-server --install-extension trond-snekvik.simple-rst
 
 # Let Puppeteer know where Chromium is
 # export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
-export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+# export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Disable sandbox for Puppeteer/Decktape
-export PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
+# export PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
+
+echo 'export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser' >> ~/.bashrc
+echo 'export PUPPETEER_PRODUCT=chrome' >> ~/.bashrc
+echo 'export PUPPETEER_SKIP_DOWNLOAD=true' >> ~/.bashrc
+echo 'export PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"' >> ~/.bashrc
 
 npm install -g decktape
 
