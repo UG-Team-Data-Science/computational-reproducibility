@@ -7,11 +7,34 @@ Choose a self-explaining name for your project.
 ## Description
 Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-[![pages status](https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility/badges/main/pipeline.svg?job=pages)](https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility/-/commits/main) [![Docs](https://img.shields.io/badge/docs-passed-brightgreen.svg)](https://gitpages.service.rug.nl/dcc/training/computational-reproducibility) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UG-Team-Data-Science/computational-reproducibility/HEAD)
+[![pages status](https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility/badges/main/pipeline.svg?job=pages)](https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility/-/commits/main) [![Docs](https://img.shields.io/badge/docs-passed-brightgreen.svg)](https://gitpages.service.rug.nl/dcc/training/computational-reproducibility) 
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Test the environment in Binder
 
+Binder is a playground environment where you can test the environment and code. All the changes will dissapear when the Tabs are closed.
+
+1. Right click on the Binder badge below and then `Open Link in New Tab`
+
+    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UG-Team-Data-Science/computational-reproducibility/HEAD)
+
+2. When the `Jupyter Lab` interface is displayed, click on the `VS Code` icon.
+3. Make some changes in the slides, for example, in `./docs/source/_sections/fundamentals.rst` (optional).
+4. Render the `html` slides, open a new terminal and run
+    ```bash
+    cd docs
+    make revealjs
+    ```
+    The `html` slides will be saved in `./build/revealjs/index.html`
+5. Render the `pdf` slides, run
+    ```bash
+    make pdfslides
+    ```
+    Then the slides in `pdf` format will be in `./build/latex/slides.pdf` which can be opened via the Jupyter Lab interface. 
+6. To inspect changes immediately run
+    ```bash
+    make autobuild
+    ```
+    in the pop up `window` click on `Open in browser`. Any changes in the slides will be reflected after refreshin the tab.
 
 ## Installation
 Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
