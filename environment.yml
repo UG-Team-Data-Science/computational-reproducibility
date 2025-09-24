@@ -6,8 +6,9 @@ dependencies:
   - python-build
   - jupyter-server-proxy    
   - sphinx
-  - sphinx-revealjs
-  - esbonio
   - python-dotenv
-  - sphinx-autobuild
   - code-server >=3.2
+  - pip:
+      - sphinx-revealjs
+      - esbonio
+      - sphinx-autobuild
