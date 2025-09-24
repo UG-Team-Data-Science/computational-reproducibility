@@ -15,8 +15,10 @@ code-server --install-extension trond-snekvik.simple-rst
 # Disable sandbox for Puppeteer/Decktape
 # export PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
 
-echo 'export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser' >> ~/.bashrc
-echo 'export PUPPETEER_PRODUCT=chrome' >> ~/.bashrc
+npx puppeteer install chrome
+
+echo 'export PUPPETEER_EXECUTABLE_PATH="$HOME/.cache/puppeteer/chrome/linux-*/chrome"' >> ~/.bashrc
+# echo 'export PUPPETEER_PRODUCT=chrome' >> ~/.bashrc
 echo 'export PUPPETEER_SKIP_DOWNLOAD=true' >> ~/.bashrc
 echo 'export PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"' >> ~/.bashrc
 
