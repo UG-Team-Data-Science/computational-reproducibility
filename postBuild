@@ -9,9 +9,9 @@ curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
  && rm google-chrome-stable_current_amd64.deb
 
 # Let Puppeteer know where Chromium is
-PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 # Disable sandbox for Puppeteer/Decktape
-PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
+export PUPPETEER_ARGS="--no-sandbox --disable-setuid-sandbox"
 
 npm install -g decktape
 
