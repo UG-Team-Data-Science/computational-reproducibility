@@ -4,6 +4,15 @@ code-server --install-extension ms-python.python
 code-server --install-extension lextudio.restructuredtext
 code-server --install-extension trond-snekvik.simple-rst
 
+curl -L \
+  -H "Accept: application/octet-stream" \
+  "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/GitHub/vsextensions/copilot/1.370.1783/vspackage" \
+  -o /tmp/github.copilot.vsix && \
+  code-server --install-extension /tmp/github.copilot.vsix && \
+  rm /tmp/github.copilot.vsix
+
+code-server --install-extension github.copilot-chat
+
 npx puppeteer install chrome
 
 echo 'export PUPPETEER_EXECUTABLE_PATH=$(find $HOME/.cache/puppeteer/chrome/linux-* -name chrome | head -n1)' >> ~/.bashrc
