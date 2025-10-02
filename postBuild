@@ -3,6 +3,7 @@
 code-server --install-extension ms-python.python
 code-server --install-extension lextudio.restructuredtext
 code-server --install-extension trond-snekvik.simple-rst
+code-server --install-extension codeium.codeium
 
 curl -L \
   "https://drive.usercontent.google.com/download?id=12y4nqRhPMNso3q_xnxdtO_r--uFnwOYZ&confirm=xxx" \
