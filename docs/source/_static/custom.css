@@ -1,4 +1,28 @@
 .reveal .slides section {
-  background-color: #002147; /* MoD blue */
-  color: #ffffff;           /* white text */
+  background-color: #ffffff; /* MoD blue */
+  color: #333333;           /* white text */
+}
+
+/* Style all headings (h1 through h6) */
+.reveal .slides section h1,
+.reveal .slides section h2,
+.reveal .slides section h3,
+.reveal .slides section h4,
+.reveal .slides section h5,
+.reveal .slides section h6 {
+  color: #333333;  /* same as main text color */
+}
+
+/* Add logo to all slides */
+.reveal::after {
+    content: '';
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 200px;  /* adjust size as needed */
+    height: 100px; /* adjust size as needed */
+    background-image: url('../_static/images/dcc_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1000;
 }
