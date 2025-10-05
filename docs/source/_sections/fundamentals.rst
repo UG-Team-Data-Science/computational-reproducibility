@@ -48,6 +48,18 @@ The Pillars
 - Documentation
 - Workflows
 
+Tools for Computational Reproducibility
+---------------------------------------
+- Version control
+- Virtualization
+  * **Containerization**
+  * Virtual machines
+  * Package managers (pip, conda, CRAN, Bioconductor)
+- Workflow systems
+- Data repositories
+- Notebooks and literate programming
+- Community standards
+
 
 Capturing Computational Environments
 ------------------------------------
@@ -58,12 +70,5 @@ Capturing Computational Environments
    :align: center
 
 
-Tools for Computational Reproducibility
----------------------------------------
-- Version control
-- **Containerization**
-- Workflow systems
-- Data repositories
-- Notebooks and literate programming
-- Community standards
+
 

@@ -19,6 +19,7 @@ Content
 - Docker containers
 
 .. include:: _sections/fundamentals.rst
+.. include:: _sections/containers_intro.rst
 
 
 .. toctree::
