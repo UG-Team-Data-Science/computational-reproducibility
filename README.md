@@ -1,12 +1,16 @@
 # Reproducible Research: a computational approach
 
-
-## Name
-Choose a self-explaining name for your project.
-
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+This repository provides a hands-on introduction to reproducible research using modern computational tools. It demonstrates best practices for creating, sharing, and maintaining reproducible scientific workflows, with a focus on Jupyter, VS Code, Docker, and Binder. The included materials guide users through setting up interactive environments, building and running containers, and generating shareable documentation and slides. Whether you are a researcher, educator, or student, this project helps you understand and apply reproducibility principles in your own computational work.  
+Key features include:
 
+- Interactive Jupyter and VS Code environments via Docker and Binder
+- Step-by-step instructions for building and running containers
+- Automated documentation and slide generation
+- Examples and templates for reproducible workflows
+- Support for collaborative development and sharing
+
+Explore the resources to learn how to make your research transparent, repeatable, and easy to share.
 [![pages status](https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility/badges/main/pipeline.svg?job=pages)](https://gitrepo.service.rug.nl/dcc/training/computational-reproducibility/-/commits/main) [![Docs](https://img.shields.io/badge/docs-passed-brightgreen.svg)](https://gitpages.service.rug.nl/dcc/training/computational-reproducibility) 
 
 ## Test the environment in Binder

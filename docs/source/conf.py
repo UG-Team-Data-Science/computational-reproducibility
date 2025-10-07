@@ -37,6 +37,7 @@ revealjs_css_files = [
     "custom.css",
 ]
 
+
 revealjs_script_conf = {
     "hash": True,
     "width": 1280,
@@ -49,4 +50,23 @@ revealjs_script_conf = {
 # revealjs_css_files = [
 #     "revealjs/plugin/highlight/zenburn.css",
 #     "https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css",
+# ]
+
+# revealjs_script_plugins = [
+#     {
+#         "name": "RevealNotes",
+#         "src": "revealjs/plugin/notes/notes.js",
+#     },
+#     {
+#         "name": "RevealHighlight",
+#         "src": "revealjs/plugin/highlight/highlight.js",
+#     },
+#     {
+#         "name": "RevealMath",
+#         "src": "revealjs/plugin/math/math.js",
+#     },
+#     {
+#         "name": "RevealCustomControls",
+#         "src": "https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js",
+#     },
 # ]

@@ -13,6 +13,11 @@
   color: #333333;  /* same as main text color */
 }
 
+.reveal pre code {
+    background: #222 !important;
+    color: #f8f8f2 !important;
+}
+
 /* Add logo to all slides */
 .reveal::after {
     content: '';

@@ -69,6 +69,15 @@ Capturing Computational Environments
    :width: 800px
    :align: center
 
+State of the Art
+----------------
 
+- Docker
+- Singularity/Apptainer
+- ReproZip
+- Guix
+- CodeOcean
+- Binder
+- ... and many more!
 
 

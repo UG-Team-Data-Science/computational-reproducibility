@@ -20,6 +20,7 @@ Content
 
 .. include:: _sections/fundamentals.rst
 .. include:: _sections/containers_intro.rst
+.. include:: _sections/managing_containers.rst
 
 
 .. toctree::
