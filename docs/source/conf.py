@@ -33,9 +33,9 @@ html_static_path = ['_static']
 revealjs_html_theme = "revealjs-simple"
 # revealjs_style_theme = 'sky'
 revealjs_static_path = ["_static"]
-revealjs_css_files = [
-    "custom.css",
-]
+# revealjs_css_files = [
+#     "custom.css",
+# ]
 
 
 revealjs_script_conf = {
@@ -47,10 +47,18 @@ revealjs_script_conf = {
     "maxScale": 2.0,
 }
 
-# revealjs_css_files = [
-#     "revealjs/plugin/highlight/zenburn.css",
-#     "https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css",
-# ]
+revealjs_script_plugins = [
+    {
+        "name": "RevealHighlight",
+        "src": "revealjs/plugin/highlight/highlight.js",
+    },
+]
+
+revealjs_css_files = [
+    "revealjs/plugin/highlight/zenburn.css",
+    "custom.css"
+    # "https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css",
+]
 
 # revealjs_script_plugins = [
 #     {
