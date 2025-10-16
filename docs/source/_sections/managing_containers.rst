@@ -100,9 +100,26 @@ Stopping Containers
 
       docker ps                     # Verify the container has stopped
 
+Removing Containers and Images
+------------------------------
 
+|
 
-Container registry
+.. code-block:: python
+   
+   docker ps -a                  # List all containers
+
+   docker rm <container_id>      # Remove a stopped container by ID
+
+   docker rm <container_name>    # Remove a stopped container by name
+
+   docker images                 # List all images
+
+   docker rmi <image_id>         # Remove an image by ID
+
+   docker rmi <image_name>       # Remove an image by name
+
+Understanding the container registry
 ------------------
 
 .. image:: https://media.geeksforgeeks.org/wp-content/uploads/20240513153832/Docker-hub-registry-768.webp

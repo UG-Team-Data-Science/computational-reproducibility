@@ -58,7 +58,6 @@ RUN curl -L \
     code-server --install-extension lextudio.restructuredtext && \
     code-server --install-extension trond-snekvik.simple-rst && \
     code-server --install-extension github.copilot-chat && \
-    code-server --install-extension codeium.codeium && \
     rm /tmp/GitHub.copilot-1.370.1783.vsix
 
 # Install Jupyter extensions for VS Code integration + Sphinx toolchain

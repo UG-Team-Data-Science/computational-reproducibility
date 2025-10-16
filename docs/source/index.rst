@@ -21,6 +21,7 @@ Content
 .. include:: _sections/fundamentals.rst
 .. include:: _sections/containers_intro.rst
 .. include:: _sections/managing_containers.rst
+.. include:: _sections/customizing_container_environments.rst
 
 
 .. toctree::
