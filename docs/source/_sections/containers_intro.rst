@@ -70,3 +70,4 @@ Container Lifecycle
    :alt: Docker Container Lifecycle
    :width: 800px
    :align: center
+   :target: https://k21academy.com/docker-kubernetes/docker-container-lifecycle-management/
