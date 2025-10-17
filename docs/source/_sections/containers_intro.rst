@@ -40,18 +40,20 @@ Running containers in Binder
 The Binder Workflow
 --------------------
 
-.. image:: https://book.the-turing-way.org/build/binder-comic-a9582f496f3175d3eb22028a3db29507.png
-   :alt: The Turing Way's reproducibility definitions
+.. image:: https://book.the-turing-way.org/build/binder-comic-8e86fe133db61d91c59778317f69cfaf.png
+   :alt: Binder workflow
    :width: 800px
    :align: center
+   :target: https://book.the-turing-way.org/communication/binder/
 
 The BinderHub architecture
 --------------------------
 
-.. image:: https://book.the-turing-way.org/build/binderhub-d184fb6c57b53b18920764dc08dc5791.svg
-   :alt: The Turing Way's reproducibility definitions
+.. image:: https://book.the-turing-way.org/build/binderhub-7f5be09935abd60ef56e7e952502bb2d.svg
+   :alt: The binderhub architecture
    :width: 800px
    :align: center
+   :target: https://book.the-turing-way.org/reproducible-research/binderhub/
 
 Container architecture
 ----------------------
