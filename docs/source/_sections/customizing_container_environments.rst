@@ -2,8 +2,14 @@
 Working with Container Environments
 ===================================
 
+
+
 Running Customized Environments
 -------------------------------
+
+|
+|
+
 .. raw:: html
 
     <div style="display: flex; justify-content: center; gap: 40px;">
@@ -25,7 +31,8 @@ Running a container
 |
 
 .. code-block:: python
-   
+
+
     docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 
     # Entered start.sh with args: jupyter lab
@@ -56,14 +63,14 @@ Running a container
 3. Have some fun!
 4. On the menu `File` click on `Shut Down` to stop the server.
 
+
 Understanding the command
 -------------------------
 
 |
 
 .. code-block:: python
-    
-    
+     
     docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
        |    |   |   |               |         |                    |
        |    |   |   |               |         |                    └── Version tag

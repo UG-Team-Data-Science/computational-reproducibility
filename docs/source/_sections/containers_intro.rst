@@ -38,9 +38,9 @@ Running containers in Binder
 `Right click` on a badge + `Open link in new tab`
 
 The Binder Workflow
---------------------
+-------------------
 
-.. image:: https://book.the-turing-way.org/build/binder-comic-8e86fe133db61d91c59778317f69cfaf.png
+.. image:: /_static/images/binder-comic-5aa62b109e2a7023a5abc80b4312ad31.png
    :alt: Binder workflow
    :width: 800px
    :align: center
@@ -49,11 +49,23 @@ The Binder Workflow
 The BinderHub architecture
 --------------------------
 
-.. image:: https://book.the-turing-way.org/build/binderhub-7f5be09935abd60ef56e7e952502bb2d.svg
+.. image:: /_static/images/binderhub-9e26d430c9c40fc4db6f858e376c15a9.svg
    :alt: The binderhub architecture
    :width: 800px
    :align: center
    :target: https://book.the-turing-way.org/reproducible-research/binderhub/
+
+
+When it is appropriate to use mybinder.org?
+-------------------------------------------
+
+|
+
+- to share a reproducible environment,
+- to communicate something in an interactive manner.
+- When the code and associated data are publicly available.
+- When the code you want to run does not require a lot of resources.
+
 
 Container architecture
 ----------------------

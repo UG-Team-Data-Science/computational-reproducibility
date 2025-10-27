@@ -2,6 +2,17 @@
 Containers in Action
 ====================
 
+
+Installing Docker (macOS, Linux, Windows)
+-----------------------------------------
+ 
+ |
+
+- `Docker Desktop (macOS) <https://docs.docker.com/desktop/setup/install/mac-install/>`_
+- `Docker Desktop (Linux) <https://docs.docker.com/desktop/setup/install/linux/>`_
+- `Docker Desktop (Windows) <https://docs.docker.com/desktop/setup/install/windows-install/>`_
+
+
 Running Containers
 ------------------
 
@@ -40,6 +51,7 @@ Listing Containers and Images
 -----------------------------
 
 |
+
 .. code-block:: python
 
    docker ps            # List running containers
@@ -71,6 +83,7 @@ Inspecting Your Docker Environment
 ----------------------------------
 
 |
+
 Open a second terminal and run the following commands:
 
 
@@ -120,7 +133,7 @@ Removing Containers and Images
    docker rmi <image_name>       # Remove an image by name
 
 Understanding the container registry
-------------------
+------------------------------------
 
 .. image:: https://media.geeksforgeeks.org/wp-content/uploads/20240513153832/Docker-hub-registry-768.webp
    :alt: Container registry
