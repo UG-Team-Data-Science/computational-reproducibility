@@ -137,6 +137,22 @@ Persistent storage
    :align: center
    :target: https://iamachs.com/blog/docker/part-5-understanding-docker-storage-and-volumes/
 
+Persistent storage
+------------------
 
-Bind Mounts
------------
+.. image:: /_static/images/ChatGPT_Image_Oct_27_2025_10_37_27_PM.png
+   :alt: ChatGPT Screenshot
+   :width: 600px
+
+
+*Image credit: OpenAI ChatGPT*
+
+What are Bind Mounts?
+---------------------
+- Bind mounts map a file or directory from the host into a container.
+- Changes on the host are reflected in the container and vice versa.
+
+How Bind Mounts Work?
+---------------------
+- Specify a host path and a container path.
+- Docker mounts the host path into the container at runtime.
