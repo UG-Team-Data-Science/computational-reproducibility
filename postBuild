@@ -9,8 +9,14 @@ curl -L \
   -o /tmp/GitHub.copilot-1.370.1783.vsix && \
   code-server --install-extension /tmp/GitHub.copilot-1.370.1783.vsix && \
   rm /tmp/GitHub.copilot-1.370.1783.vsix
+curl -L \
+  "https://drive.usercontent.google.com/download?id=1QIQC1MVPhO_Y1XZNvbb8GSbX3nDx7ppb&confirm=xxx" \
+  -o /tmp/GitHub.copilot-chat-latest.vsix && \
+  code-server --install-extension /tmp/GitHub.copilot-chat-latest.vsix && \
+  rm /tmp/GitHub.copilot-chat-latest.vsix
 
-code-server --install-extension github.copilot-chat
+# https://drive.google.com/file/d/1QIQC1MVPhO_Y1XZNvbb8GSbX3nDx7ppb/view?usp=sharing
+# code-server --install-extension github.copilot-chat
 
 npx puppeteer install chrome
 

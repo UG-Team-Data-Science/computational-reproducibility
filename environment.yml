@@ -7,7 +7,7 @@ dependencies:
   - jupyter-server-proxy    
   - sphinx
   - python-dotenv
-  - code-server >=4.1
+  - code-server=4.104
   - pip:
       - sphinx-revealjs
       - esbonio
