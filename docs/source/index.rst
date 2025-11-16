@@ -15,8 +15,9 @@ Content
 
 - Fundamentals of computational reproducibility
 - Containerization
-- Binder
-- Docker containers
+    - Binder
+    - Docker containers
+- Using containers for reproducible research 
 
 .. include:: _sections/fundamentals.rst
 .. include:: _sections/containers_intro.rst
