@@ -73,7 +73,7 @@ CON:
 
 PRO:
 
-**Can saeve you time**
+**Can save you time**
 
 State of the Art
 ----------------
@@ -83,7 +83,7 @@ State of the Art
 - ReproZip
 - Guix
 - CodeOcean
-- Binder
-- ... and many more!
+- **Binder**
+- **Github codespaces** ... and many more!
 
 

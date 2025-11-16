@@ -6,18 +6,20 @@
 Reproducible Research 
 =====================
 
-A computational approach
+A container approach
 
 January 2026
 
 Content
 =======
 
-- Fundamentals of computational reproducibility
-- Containerization
-    - Binder
-    - Docker containers
-- Using containers for reproducible research 
+- Containers for reproducible research
+- Working with containers
+   - Running containers
+   - Building containers
+   - Stopping and deleting containers
+   - Persistent storage using containers 
+- Using containers in the cloud 
 
 .. include:: _sections/fundamentals.rst
 .. include:: _sections/containers_intro.rst
