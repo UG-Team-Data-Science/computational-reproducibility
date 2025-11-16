@@ -13,12 +13,12 @@ January 2026
 Content
 =======
 
-- Containers for reproducible research
+- Using containers for reproducible research
 - Working with containers
-   - Running containers
-   - Building containers
-   - Stopping and deleting containers
-   - Persistent storage using containers 
+  - Running
+  - Building
+  - Stopping and deleting
+  - Persistent storage 
 - Using containers in the cloud 
 
 .. include:: _sections/fundamentals.rst
