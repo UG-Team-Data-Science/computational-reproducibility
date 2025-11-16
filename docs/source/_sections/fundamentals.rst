@@ -3,6 +3,24 @@ Goal
 ====
 Computational reproducibility means that research results obtained through computation can be consistently **re-produced** by others  given the same inputs and methods. 
 
+
+The Pillars
+-----------
+- Code
+- Data
+- **Environment**
+- Documentation
+- Workflows
+
+The Challenges
+--------------
+
+- Software rot
+- Data availability
+- Complexity
+- Human factors
+
+
 Benefits of Computational Reproducibility
 -----------------------------------------
 
@@ -13,13 +31,6 @@ Benefits of Computational Reproducibility
 5. Scalability and Generalization
 6. Policy and Funding Compliance
 
-The Challenges
---------------
-
-- Software rot
-- Data availability
-- Complexity
-- Human factors
 
 Spectrum of reproducibility
 ---------------------------
@@ -40,13 +51,7 @@ Spectrum of reproducibility
    :width: 800px
    :align: center
 
-The Pillars
------------
-- Code
-- Data
-- **Environment**
-- Documentation
-- Workflows
+
 
 Tools for Computational Reproducibility
 ---------------------------------------

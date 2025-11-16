@@ -1,4 +1,4 @@
-# Reproducible Research: a computational approach
+# Containers for Reproducible Research: Standardizing Computational Environments for Scientific Integrity
 
 ## Description
 This repository provides a hands-on introduction to reproducible research using modern computational tools. It demonstrates best practices for creating, sharing, and maintaining reproducible scientific workflows, with a focus on Jupyter, VS Code, Docker, and Binder. The included materials guide users through setting up interactive environments, building and running containers, and generating shareable documentation and slides. Whether you are a researcher, educator, or student, this project helps you understand and apply reproducibility principles in your own computational work.  
