@@ -15,10 +15,10 @@ Content
 
 - Using containers for reproducible research
 - Working with containers
-  - Running
-  - Building
-  - Stopping and deleting
-  - Persistent storage 
+    - Running
+    - Building
+    - Stopping and deleting
+    - Persistent storage 
 - Using containers in the cloud 
 
 .. include:: _sections/fundamentals.rst
