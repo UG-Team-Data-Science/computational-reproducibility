@@ -1,0 +1,55 @@
+FROM lscr.io/linuxserver/code-server:latest
+
+# Provide the VS Code Marketplace gallery endpoint (EXTENSIONS_GALLERY)
+ENV EXTENSIONS_GALLERY='{"serviceUrl":"https://marketplace.visualstudio.com/_apis/public/gallery","itemUrl":"https://marketplace.visualstudio.com/items"}'
+
+# Install base tools, R, and dependencies needed to install quarto .deb packages
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+      ca-certificates \
+      wget \
+      curl \
+      gnupg2 \
+      lsb-release \
+      software-properties-common \
+      gdebi-core \
+      dpkg \
+      build-essential \
+      libssl-dev \
+      libxml2-dev \
+      libcurl4-openssl-dev; \
+    rm -rf /var/lib/apt/lists/*
+
+# Add CRAN repo and install R (cran40 repository for Ubuntu)
+RUN set -eux; \
+    UBUNTU_CODENAME="$(. /etc/os-release && echo $UBUNTU_CODENAME)"; \
+    # fallback to lsb_release if /etc/os-release doesn't have UBUNTU_CODENAME
+    if [ -z "$UBUNTU_CODENAME" ]; then UBUNTU_CODENAME="$(lsb_release -cs)"; fi; \
+    wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | apt-key add -; \
+    echo "deb https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" > /etc/apt/sources.list.d/cran.list; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends r-base r-base-dev; \
+    rm -rf /var/lib/apt/lists/*
+
+# Simplified Quarto CLI installation, assuming amd64 architecture
+RUN set -eux; \
+    QTMP="/tmp/quarto.deb"; \
+    QUARTO_URL="https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.deb"; \
+    echo "Downloading Quarto from: ${QUARTO_URL}"; \
+    wget -O "${QTMP}" "${QUARTO_URL}"; \
+    dpkg -i "${QTMP}" || apt-get -f install -y; \
+    rm -f "${QTMP}"; \
+    # sanity check (non-fatal)
+    quarto --version || true
+
+# Install R packages referenced in the devcontainer postCreateCommand (at minimum 'reticulate')
+RUN set -eux; \
+    R_SCRIPT="options(repos='https://cloud.r-project.org/'); \
+    p <- c('reticulate'); \
+    to_install <- p[!(p %in% installed.packages()[,'Package'])]; \
+    if (length(to_install)) install.packages(to_install, dependencies=TRUE)"; \
+    Rscript -e "$R_SCRIPT" || true;
+
+# Cleanup apt caches
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
