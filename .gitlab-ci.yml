@@ -15,7 +15,7 @@ pages:
       # - rm -rf public
       # - make -C docs revealjs
     - rm -rf public
-    - mkdir -p public
+    - mkdir -p public/quarto
     - chmod -R 777 public
     - sphinx-build -b revealjs docs/source public/sphinx
       # Build Quarto slides
