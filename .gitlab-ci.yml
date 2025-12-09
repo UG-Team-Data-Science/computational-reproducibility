@@ -17,7 +17,7 @@ pages:
     - rm -rf public
     - mkdir -p public
     - chmod -R 777 public
-    - sphinx-build -b revealjs docs/source public
+    - sphinx-build -b revealjs docs/source public/sphinx
       # Build Quarto slides
     - quarto check install
     - quarto render docs/quarto/slides.qmd --output-dir public/quarto
