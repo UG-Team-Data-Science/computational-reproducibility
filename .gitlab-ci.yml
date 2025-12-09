@@ -5,7 +5,7 @@ pages:
     # Install build dependencies
     - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
     # Install Quarto
-    - apt-get update && apt-get install -y --no-install-recommends curl gdebi-core
+    - apt-get update && apt-get install -y --no-install-recommends curl gdebi-core pandoc
     - curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.deb
     - gdebi --non-interactive quarto-1.8.26-linux-amd64.deb
     - rm -f quarto-1.8.26-linux-amd64.deb
@@ -16,7 +16,12 @@ pages:
       # - make -C docs revealjs
     - sphinx-build -b revealjs docs/source public
       # Build Quarto slides
+    - quarto check install
     - quarto render docs/quarto/slides.qmd --output-dir public/quarto
+    - echo "--- PUBLIC DIR CONTENTS ---"
+    - ls -R public || echo "no public directory"
+    - echo "--- ROOT DIR CONTENTS ---"
+    - ls -la
 
   artifacts:
     paths:
