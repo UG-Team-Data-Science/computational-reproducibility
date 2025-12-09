@@ -19,7 +19,7 @@ pages:
     - chmod -R 777 public
       # Build Quarto slides
     - quarto check install
-    - quarto render docs/quarto/slides.qmd --output-dir ./public/quarto
+    - quarto render docs/quarto/slides.qmd --output-dir ./public/quarto --debug
     - echo "--- PUBLIC DIR CONTENTS ---"
     - ls -R public || echo "no public directory"
     - echo "--- ROOT DIR CONTENTS ---"
