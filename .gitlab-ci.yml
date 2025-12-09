@@ -16,7 +16,7 @@ pages:
       # - make -C docs revealjs
     - sphinx-build -b revealjs docs/source public
       # Build Quarto slides
-    - quarto render docs/quarto/slides.qmd --output-dir public/quarto --to html --output index.html
+    - quarto render docs/quarto/slides.qmd --output-dir public/quarto
 
   artifacts:
     paths:
