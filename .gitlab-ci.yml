@@ -20,7 +20,7 @@ pages:
     - sphinx-build -b revealjs docs/source public/sphinx
       # Build Quarto slides
     - quarto check install
-    - quarto render docs/quarto/slides.qmd --output-dir public/quarto
+    - quarto render docs/quarto/slides.qmd --output-dir ./public/quarto
     - echo "--- PUBLIC DIR CONTENTS ---"
     - ls -R public || echo "no public directory"
     - echo "--- ROOT DIR CONTENTS ---"
