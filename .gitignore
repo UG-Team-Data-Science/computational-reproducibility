@@ -39,3 +39,27 @@ docs/.sphinx
 *.DS_Store
 *.swp
 *.swo
+
+# Quarto / site build artifacts
+.quarto/
+.quarto-cache/
+.cache/
+
+# Quarto output folders
+_site/
+_book/
+
+# Generated asset bundles (images, JS/CSS produced by Quarto/Pandoc)
+*_files/
+slides_files/
+
+# Optional: built HTML (uncomment if you don't want to track generated HTML)
+docs/quarto/*.html
+*.html
+
+# Jupyter / editor artifacts
+.ipynb_checkpoints/
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user

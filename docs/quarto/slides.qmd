@@ -1,0 +1,359 @@
+---
+title: "Reproducible Software"
+subtitle: "A Container Approach"
+date: "January 2026"
+format:
+  revealjs:
+    logo: images/dcc_logo2.png
+    css: slides.css
+    theme: simple
+    slide-number: true
+    transition: fade
+    incremental: false
+---
+
+## Content
+
+- Using containers for reproducible research
+- Working with containers
+	- Running
+	- Building
+	- Stopping and deleting
+	- Persistent storage
+- Using containers in the cloud
+
+## Goal
+
+Computational reproducibility means that research results obtained through computation can be consistently **re-produced** by others given the same inputs and methods.
+
+## The Pillars
+
+- Code
+- Data
+- **Environment**
+- Documentation
+- Workflows
+
+## The Challenges
+
+- Software rot
+- Data availability
+- Complexity
+- Human factors
+
+## Benefits of Computational Reproducibility
+
+1. Integrity and trust
+2. **Efficiency and reuse**
+3. Collaboration and transparency
+4. Long-term preservation
+5. Scalability and generalization
+6. Policy and funding compliance
+
+## Spectrum of reproducibility
+
+![](/images/reproducible-matrix.jpg){width=800px}
+
+## Tools for Computational Reproducibility
+
+- Version control
+- Virtualization
+	- **Containerization**
+	- Virtual machines
+	- Package managers (pip, conda, CRAN, Bioconductor)
+- Workflow systems
+- Data repositories
+- Notebooks and literate programming
+- Community standards
+
+## Capturing Computational Environments
+
+![](/images/computational-enviro.png){width=800px}
+
+## Why docker containers?
+
+- **Con:** costs time
+- **Pro:** can save you time
+
+## State of the Art
+
+- Docker
+- Singularity/Apptainer
+- ReproZip
+- Guix
+- CodeOcean
+- **Binder**
+- **GitHub Codespaces**
+
+## Introduction to Containers
+
+| Core objects | Supporting services |
+| --- | --- |
+| - **Images** | - **Volumes** |
+| - **Containers** | - **Registries** |
+| - **Dockerfile** | - **Docker Hub** |
+| - **Ports** | - **Networking** |
+| - **etc.** | - **Docker daemon** |
+
+## How to run the visualizations?
+
+<iframe src="https://clauswilke.com/dataviz/" width="100%" height="600px"></iframe>
+
+## Running containers in Binder
+
+[![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
+[![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=lab)
+
+Right click on a badge and select Open link in new tab.
+
+## The Binder Workflow
+
+![](/images/binder-comic-5aa62b109e2a7023a5abc80b4312ad31.png){width=800px fig-align="center"}
+
+## The BinderHub architecture
+
+![](/images/binderhub-9e26d430c9c40fc4db6f858e376c15a9.svg){width=800px fig-align="center"}
+
+## When is mybinder.org appropriate?
+
+- To share a reproducible environment
+- To communicate something in an interactive manner
+- When the code and associated data are publicly available
+- When the code you want to run does not require a lot of resources
+
+## Container architecture
+
+::: columns
+::: column
+![](/images/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today-1110x919.png){width=100%}
+:::
+::: column
+![](/images/container-what-is-container-1110x961.png){ width=800px fig-align="center" target="https://www.docker.com/app/uploads/2021/11/container-what-is-container-1110x961.png" }
+:::
+:::
+
+## Container Lifecycle
+
+![](/images/container_lifecycle.png){width=800px fig-align="center" target="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgevspybo00m3a7l4hfrz.png"}
+
+## Installing Docker (macOS, Linux, Windows)
+
+- [Docker Desktop (macOS)](https://docs.docker.com/desktop/setup/install/mac-install/)
+- [Docker Desktop (Linux)](https://docs.docker.com/desktop/setup/install/linux/)
+- [Docker Desktop (Windows)](https://docs.docker.com/desktop/setup/install/windows-install/)
+
+## Running Containers {data-auto-animate=true}
+
+```bash
+docker run hello-world
+```
+
+## Running Containers (output) {data-auto-animate=true}
+
+```text
+docker run hello-world
+
+Hello from Docker!
+
+ This message shows that your installation appears to be working correctly.
+
+ To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ ...
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+ to your terminal.
+ ...
+ For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+
+## Listing Containers and Images
+
+```bash
+docker ps            # List running containers
+docker ps -a         # List all containers (including stopped)
+docker images        # List all images
+```
+
+## Having fun with Containers
+
+```bash
+docker run -it debian bash                # Start an interactive bash session
+apt update                                # Update package lists
+apt install -y cowsay fortune             # Install cowsay and fortune
+/usr/games/fortune | /usr/games/cowsay    # Enjoy!
+```
+
+## Inspecting Your Docker Environment
+
+Open a second terminal and run:
+
+```bash
+docker ps            # List running containers
+docker ps -a         # List all containers (including stopped)
+docker images        # List all images
+```
+
+## Stopping Containers
+
+```bash
+docker ps                     # List running containers
+docker stop <container_id>    # Stop a running container
+docker stop <container_name>  # Stop a running container
+docker ps                     # Verify the container has stopped
+```
+
+## Removing Containers and Images
+
+```bash
+docker ps -a                  # List all containers
+docker rm <container_id>      # Remove a stopped container by ID
+docker rm <container_name>    # Remove a stopped container by name
+docker images                 # List all images
+docker rmi <image_id>         # Remove an image by ID
+docker rmi <image_name>       # Remove an image by name
+```
+
+## Understanding the container registry
+
+![](/images/Docker-hub-registry-768.webp){width=800px fig-align="center" target="https://media.geeksforgeeks.org/wp-content/uploads/20240513153832/Docker-hub-registry-768.webp"}
+
+## Ready to use environments
+
+:::: {.columns}
+::: {.column width="50%"}
+Jupyter stacks
+
+![](/images/jupyter-logo.svg){width="200px" fig-align="center" target="https://jupyter-docker-stacks.readthedocs.io/en/latest/_static/jupyter-logo.svg"}
+:::
+
+:::{.column width="50%"}
+Rocker
+
+![](/images/rocker.png){width="200px" fig-align="center" target="https://rocker-project.org/img/rocker.png"}
+:::
+::::
+
+## Jupyter stacks
+
+![](/images/inherit.svg){width=1200px fig-align="center" target="https://raw.githubusercontent.com/jupyter/docker-stacks/refs/heads/main/docs/images/inherit.svg"}
+
+## Running a container
+
+```bash
+docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
+# Entered start.sh with args: jupyter lab
+# ...
+#     To access the server, open this file in a browser:
+#         file:///home/jovyan/.local/share/jupyter/runtime/jpserver-7-open.html
+#     Or copy and paste one of these URLs:
+#         http://eca4aa01751c:8888/lab?token=d4ac9278f5f5388e88097a3a8ebbe9401be206cfa0b83099
+#         http://127.0.0.1:8888/lab?token=d4ac9278f5f5388e88097a3a8ebbe9401be206cfa0b83099
+```
+
+## 100 numpy exercises
+
+1. Once in JupyterLab, open a terminal and run:
+
+```bash
+cd work
+git clone https://github.com/rougier/numpy-100.git
+pip install mdutils
+```
+
+2. Double-click on `100_numpy_exercises.ipynb` to open the notebook.
+3. Have some fun!
+4. In the menu, click on `File` then on `Shut Down` to stop the server.
+
+## Understanding the command
+
+```bash
+docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
+|    |   |   |               |         |                    |
+|    |   |   |               |         |                    +-- Version tag
+|    |   |   |               |         +-- Image name from Jupyter
+|    |   |   |               +-- Registry (Quay.io)
+|    |   |   +-- Port mapping (host:container)
+|    |   +-- Interactive terminal
+|    +-- Run a container
++-- Docker command
+```
+
+## Port mapping
+
+![](/images/portmapping.drawio.png){fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
+
+## Docker image search
+
+- Docker Hub web interface: [https://hub.docker.com/search?q=jupyter](https://hub.docker.com/search?q=jupyter)
+- Best practices:
+	- Prefer official images
+	- Verify trusted publishers
+	- Always use specific tags
+	- Avoid `latest` tag for reproducibility
+
+## Restarting or removing a container
+
+```bash
+# list containers
+docker ps --all
+# CONTAINER ID   IMAGE                                       COMMAND                  CREATED              STATUS                     PORTS     NAMES
+# eca4aa01751c   quay.io/jupyter/scipy-notebook:2025-03-14   "tini -g -- start-no…"   About a minute ago   Exited (0) 5 seconds ago             silly_panini
+
+# start the stopped container
+docker start --attach -i eca4aa01751c
+# Entered start.sh with args: jupyter lab
+# ...
+
+# remove the stopped container
+docker rm eca4aa01751c
+# eca4aa01751c
+```
+
+## Persistent storage (volumes)
+
+![](/images/docker-storage.png){width=500px fig-align="center" target="https://iamachs.com/images/posts/docker/part-5-understanding-docker-storage-and-volumes/docker-storage.png"}
+
+## What are Bind Mounts? {.smaller}
+
+![](/images/ChatGPT_Image_Oct_27_2025_10_37_27_PM.png){width=600px, fig-align="center"}
+
+*Image credit: OpenAI ChatGPT*
+
+
+- Bind mounts map a file or directory from the host into a container.
+- Changes on the host are reflected in the container and vice versa.
+
+## How to use Bind Mounts
+
+::: {.panel-tabset}
+#### Linux (bash)
+
+```bash
+docker run -it -p 8888:8888 \
+  -v "$PWD":/home/jovyan/work \
+  quay.io/jupyter/scipy-notebook:2025-03-14
+```
+
+#### PowerShell
+
+```powershell
+docker run -it -p 8888:8888 `
+  -v "${PWD}:/home/jovyan/work" `
+  quay.io/jupyter/scipy-notebook:2025-03-14
+```
+
+#### Windows CMD
+
+```bat
+docker run -it -p 8888:8888 ^
+  -v "%cd%:/home/jovyan/work" ^
+  quay.io/jupyter/scipy-notebook:2025-03-14
+```
+:::
+
+
+## How Bind Mounts Work?
+
+- Specify a host path and a container path.
+- Docker mounts the host path into the container at runtime.

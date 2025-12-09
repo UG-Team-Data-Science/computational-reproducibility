@@ -1,0 +1,28 @@
+.reveal .slide-logo {
+  content: "";
+  position: fixed;
+  right: 20px;
+  bottom: 16px;
+  width: 200px !important;
+  height: 150px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+@media (max-width: 900px) {
+  .reveal::after {
+    width: 120px;
+    height: 55px;
+    right: 14px;
+    bottom: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reveal::after {
+    width: 90px;
+    height: 42px;
+    right: 10px;
+    bottom: 8px;
+  }
+}

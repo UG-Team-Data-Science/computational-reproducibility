@@ -32,13 +32,21 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends r-base r-base-dev; \
     rm -rf /var/lib/apt/lists/*
 
-# Simplified Quarto CLI installation, assuming amd64 architecture
+# Quarto CLI installation (architecture-aware)
 RUN set -eux; \
+    # allow a fallback value in case ARG wasn't provided to the build context
+    QUARTO_VERSION="${QUARTO_VERSION:-1.8.26}"; \
+    ARCH="$(dpkg --print-architecture 2>/dev/null || echo $(uname -m))"; \
+    case "$ARCH" in \
+      amd64) QUARTO_ARCH=linux-amd64 ;; \
+      arm64|aarch64) QUARTO_ARCH=linux-arm64 ;; \
+      *) QUARTO_ARCH=linux-amd64 ;; \
+    esac; \
     QTMP="/tmp/quarto.deb"; \
-    QUARTO_URL="https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.deb"; \
-    echo "Downloading Quarto from: ${QUARTO_URL}"; \
+    QUARTO_URL="https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-${QUARTO_ARCH}.deb"; \
+    echo "Downloading Quarto from: ${QUARTO_URL} (detected arch: ${ARCH})"; \
     wget -O "${QTMP}" "${QUARTO_URL}"; \
-    dpkg -i "${QTMP}" || apt-get -f install -y; \
+    dpkg -i "${QTMP}" || (apt-get update && apt-get -y -f install); \
     rm -f "${QTMP}"; \
     # sanity check (non-fatal)
     quarto --version || true
@@ -50,6 +58,9 @@ RUN set -eux; \
     to_install <- p[!(p %in% installed.packages()[,'Package'])]; \
     if (length(to_install)) install.packages(to_install, dependencies=TRUE)"; \
     Rscript -e "$R_SCRIPT" || true;
+
+COPY extensions.sh /etc/cont-init.d/10-install-extensions
+RUN chmod +x /etc/cont-init.d/10-install-extensions
 
 # Cleanup apt caches
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

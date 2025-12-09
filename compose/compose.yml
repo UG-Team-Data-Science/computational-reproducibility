@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.code-server
+      args:
+        QUARTO_VERSION: ${QUARTO_VERSION:-1.8.26}
     image: code-server:custom
     container_name: code-server
     environment:
@@ -12,7 +14,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - .config:/config
-      - /home/venus/.ssh:/config/.ssh:ro
+      - ${HOME}/.ssh:/config/.ssh:ro
       - ../:/config/workspace
     ports:
       - 8443:8443
