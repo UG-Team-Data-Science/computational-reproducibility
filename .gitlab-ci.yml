@@ -1,18 +1,23 @@
 pages:
   stage: deploy
   image: python:3.11
-    # before_script:
+  before_script:
     # Install build dependencies
-    # Ensure build directory is clean
+    - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
+    # Install Quarto
+    - apt-get update && apt-get install -y --no-install-recommends curl gdebi-core
+    - curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.deb
+    - gdebi --non-interactive quarto-1.8.26-linux-amd64.deb
+    - rm -f quarto-1.8.26-linux-amd64.deb
   script:
     # Build reveal.js slides in docs/
-    - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
+    # - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
       # - rm -rf public
       # - make -C docs revealjs
     - sphinx-build -b revealjs docs/source public
-    # Move Sphinx build output to GitLab Pages' expected location
-    # - mkdir -p public
-    # - cp -r  docs/build/revealjs/* public
+      # Build Quarto slides
+    - quarto render docs/quarto/slides.qmd --output-dir public/quarto
+
   artifacts:
     paths:
       - public

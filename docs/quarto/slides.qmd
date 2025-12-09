@@ -2,6 +2,7 @@
 title: "Reproducible Software"
 subtitle: "A Container Approach"
 date: "January 2026"
+date-format: "MMMM YYYY"
 format:
   revealjs:
     logo: images/dcc_logo2.png
@@ -269,13 +270,13 @@ pip install mdutils
 
 ```bash
 docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
-|    |   |   |               |         |                    |
-|    |   |   |               |         |                    +-- Version tag
-|    |   |   |               |         +-- Image name from Jupyter
-|    |   |   |               +-- Registry (Quay.io)
-|    |   |   +-- Port mapping (host:container)
-|    |   +-- Interactive terminal
-|    +-- Run a container
+|       |   |   |               |         |                    |
+|       |   |   |               |         |                    +-- Version tag
+|       |   |   |               |         +-- Image name from Jupyter
+|       |   |   |               +-- Registry (Quay.io)
+|       |   |   +-- Port mapping (host:container)
+|       |   +-- Interactive terminal
+|       +-- Run a container
 +-- Docker command
 ```
 
