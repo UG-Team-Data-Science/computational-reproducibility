@@ -14,6 +14,9 @@ pages:
     # - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
       # - rm -rf public
       # - make -C docs revealjs
+    - rm -rf public
+    - mkdir -p public
+    - chmod -R 777 public
     - sphinx-build -b revealjs docs/source public
       # Build Quarto slides
     - quarto check install
