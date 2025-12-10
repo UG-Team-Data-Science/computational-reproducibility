@@ -1,4 +1,8 @@
 ---
+project:
+  type: website
+  output-dir: public/quarto
+
 title: "Reproducible Software"
 subtitle: "A Container Approach"
 date: "January 2026"
