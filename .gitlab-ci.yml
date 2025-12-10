@@ -19,12 +19,12 @@ pages:
     - chmod -R 777 public
       # Build Quarto slides
     - quarto check install
-    - quarto render docs/quarto/slides.qmd --to revealjs --output-dir ./public/quarto --debug
+    - quarto render docs/quarto/slides.qmd --to revealjs --output-dir public --debug
     - echo "--- PUBLIC DIR CONTENTS ---"
     - ls -R public || echo "no public directory"
     - echo "--- ROOT DIR CONTENTS ---"
     - ls -la
-    - sphinx-build -b revealjs docs/source public/sphinx
+    # - sphinx-build -b revealjs docs/source public/sphinx
 
 
   artifacts:
