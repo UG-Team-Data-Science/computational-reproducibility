@@ -27,6 +27,8 @@ format:
 	- Persistent storage
 - Using containers in the cloud
 
+# Introduction
+
 ## Goal
 
 Computational reproducibility means that research results obtained through computation can be consistently **re-produced** by others given the same inputs and methods.
@@ -45,6 +47,20 @@ Computational reproducibility means that research results obtained through compu
 - Data availability
 - Complexity
 - Human factors
+
+## Why reproducibility matters {.smaller}
+
+- **Trust:** Verifiable results build confidence in findings.
+- **Reuse:** Reproducible workflows let others (and future-you) build on your work.
+- **Transparency:** Clear methods reduce errors and enable scrutiny.
+- **Efficiency:** Saves time by avoiding duplicated effort.
+- **Credit:** Reproducible artifacts (data, code, environments) increase reuse and citations.
+
+
+
+- **Open Science:** Share code, data, and methods openly when possible.
+- **FAIR:** Make outputs Findable, Accessible, Interoperable, and Reusable.
+
 
 ## Benefits of Computational Reproducibility
 
@@ -75,6 +91,8 @@ Computational reproducibility means that research results obtained through compu
 
 ![](/images/computational-enviro.png){width=800px}
 
+# Reproducible Research with Containers
+
 ## Why docker containers?
 
 - **Con:** costs time
@@ -90,7 +108,7 @@ Computational reproducibility means that research results obtained through compu
 - **Binder**
 - **GitHub Codespaces**
 
-## Introduction to Containers
+## Container Terminology
 
 | Core objects | Supporting services |
 | --- | --- |
