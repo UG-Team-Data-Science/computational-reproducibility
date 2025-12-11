@@ -15,11 +15,10 @@ pages:
       # - rm -rf public
       # - make -C docs revealjs
     - rm -rf public
-    - mkdir -p public/quarto
-    - chmod -R 777 public
+    - mkdir -p public
       # Build Quarto slides
     - quarto check install
-    - quarto render docs/quarto/slides.qmd --to revealjs --output-dir public --debug
+    - quarto render docs/quarto/slides.qmd --to revealjs --output public/index.html --debug
     - echo "--- PUBLIC DIR CONTENTS ---"
     - ls -R public || echo "no public directory"
     - echo "--- ROOT DIR CONTENTS ---"
