@@ -17,8 +17,15 @@ pages:
     - rm -rf public
     - mkdir -p public
       # Build Quarto slides
-    - quarto check install
-    - quarto render docs/quarto/slides.qmd --to revealjs --output public/index.html --debug
+     # Build slides (output lives next to the input file)
+    - cd docs/quarto
+    - quarto render slides.qmd --to revealjs --debug
+
+    # Move the rendered site to the GitLab Pages folder
+    - mv slides.html ../../public/index.html
+    - mv slides_files ../../public/slides_files 2>/dev/null || true
+    - mv slides-revealjs ../../public/slides-revealjs 2>/dev/null || true
+    - cd ../../
     - echo "--- PUBLIC DIR CONTENTS ---"
     - ls -R public || echo "no public directory"
     - echo "--- ROOT DIR CONTENTS ---"
