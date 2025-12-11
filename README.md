@@ -17,7 +17,7 @@ Explore the resources to learn how to make your research transparent, repeatable
 
 [![Docs](https://img.shields.io/badge/docs-passed-brightgreen.svg)](https://gitpages.service.rug.nl/dcc/training/computational-reproducibility)
 
-<a href="https://gitpages.service.rug.nl/dcc/training/computational-reproducibility/quarto/">
+<a href="https://gitpages.service.rug.nl/dcc/training/computational-reproducibility/">
   <img src="https://user-images.githubusercontent.com/1769619/195922332-4308bb3c-ccfd-47e6-b6a6-f48b94c22fcf.svg" height="18" alt="Quarto Logo"/>
   <span style="font-size:14px; position:relative; top:-3px;">Slides</span>
 </a>

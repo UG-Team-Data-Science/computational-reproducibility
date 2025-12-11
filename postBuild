@@ -1,22 +1,15 @@
 #!/bin/bash
 
+# Provide the VS Code Marketplace gallery endpoint (EXTENSIONS_GALLERY)
+ENV EXTENSIONS_GALLERY='{"serviceUrl":"https://marketplace.visualstudio.com/_apis/public/gallery","itemUrl":"https://marketplace.visualstudio.com/items"}'
+
 code-server --install-extension ms-python.python
 code-server --install-extension lextudio.restructuredtext
 code-server --install-extension trond-snekvik.simple-rst
-
-curl -L \
-  "https://drive.usercontent.google.com/download?id=12y4nqRhPMNso3q_xnxdtO_r--uFnwOYZ&confirm=xxx" \
-  -o /tmp/GitHub.copilot-1.370.1783.vsix && \
-  code-server --install-extension /tmp/GitHub.copilot-1.370.1783.vsix && \
-  rm /tmp/GitHub.copilot-1.370.1783.vsix
-curl -L \
-  "https://drive.usercontent.google.com/download?id=1QIQC1MVPhO_Y1XZNvbb8GSbX3nDx7ppb&confirm=xxx" \
-  -o /tmp/GitHub.copilot-chat-latest.vsix && \
-  code-server --install-extension /tmp/GitHub.copilot-chat-latest.vsix && \
-  rm /tmp/GitHub.copilot-chat-latest.vsix
-
-# https://drive.google.com/file/d/1QIQC1MVPhO_Y1XZNvbb8GSbX3nDx7ppb/view?usp=sharing
-# code-server --install-extension github.copilot-chat
+code-server --install-extension GitHub.copilot
+code-server --install-extension GitHub.copilot-chat
+code-server --install-extension quarto.quarto
+code-server --install-extension ms-python.vscode-pylance
 
 npx puppeteer install chrome
 

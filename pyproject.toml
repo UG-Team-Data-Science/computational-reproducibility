@@ -6,7 +6,7 @@ version_scheme = "post-release"
 
 [project]
 name = "jupyter_vscode_proxy"
-description = "Environment for VS Code and Sphinx"
+description = "Environment for VS Code and Quarto"
 readme = "README.md"
 version = "0.0.1"
 authors = [
