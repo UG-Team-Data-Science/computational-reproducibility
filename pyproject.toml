@@ -28,5 +28,6 @@ exclude = '''
   | build
   | dist
   | docker
+  | compose
 )/
 '''
