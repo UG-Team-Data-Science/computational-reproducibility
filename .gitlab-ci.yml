@@ -25,6 +25,8 @@ pages:
     - mv slides.html ../../public/index.html
     - mv slides_files ../../public/slides_files 2>/dev/null || true
     - mv slides-revealjs ../../public/slides-revealjs 2>/dev/null || true
+    # Copy images referenced by the slides
+    - cp -r images ../../public/images
     - cd ../../
     - echo "--- PUBLIC DIR CONTENTS ---"
     - ls -R public || echo "no public directory"
