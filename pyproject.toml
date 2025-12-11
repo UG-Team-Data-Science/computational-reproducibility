@@ -27,7 +27,5 @@ exclude = '''
   | \.venv
   | build
   | dist
-  | docker
-  | compose
 )/
 '''

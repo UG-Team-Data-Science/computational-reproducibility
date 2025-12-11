@@ -4,10 +4,12 @@ channels:
 dependencies:
   - numpy
   - python-build
-  - jupyter-server-proxy    
+  - jupyter-server-proxy
+  - nodejs
+  - quarto
   - sphinx
   - python-dotenv
-  - code-server=4.104
+  - code-server
   - pip:
       - sphinx-revealjs
       - esbonio
