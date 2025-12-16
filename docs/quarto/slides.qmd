@@ -390,6 +390,6 @@ docker run -it -p 8888:8888 ^
 
 :::{.column width="60%"}
 
-![](/images/ContainerFileSystem.png){width="600px" fig-align="center"}
+![](/images/ContainerFilesystem.png){width="600px" fig-align="center"}
 :::
 ::::
