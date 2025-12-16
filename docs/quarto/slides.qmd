@@ -380,3 +380,16 @@ docker run -it -p 8888:8888 ^
 
 - Specify a host path and a container path.
 - Docker mounts the host path into the container at runtime.
+
+## Host vs. Container filesystems
+
+:::: {.columns}
+::: {.column width="40%"}
+![](/images/HostFileSystem.png){width="400px" fig-align="center"}
+:::
+
+:::{.column width="60%"}
+
+![](/images/ContainerFileSystem.png){width="600px" fig-align="center"}
+:::
+::::
