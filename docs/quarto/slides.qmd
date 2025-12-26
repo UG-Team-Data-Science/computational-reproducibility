@@ -243,25 +243,38 @@ docker rmi <image_name>       # Remove an image by name
 
 ## Ready to use environments
 
-:::: {.columns}
+:::: {.columns style="font-size: 0.8em;"}
 ::: {.column width="50%"}
-Jupyter stacks
+[Jupyter stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/)
 
-![](/images/jupyter-logo.svg){width="200px" fig-align="center" target="https://jupyter-docker-stacks.readthedocs.io/en/latest/_static/jupyter-logo.svg"}
+![](/images/jupyter-logo.svg){height="200px" fig-align="center" target="https://jupyter-docker-stacks.readthedocs.io/en/latest/_static/jupyter-logo.svg"}
+
+| image | pulls  |
+|-------|--------|
+| [`scipy-notebook`](https://hub.docker.com/r/scipy-notebook)  | ![Docker Pulls](https://img.shields.io/docker/pulls/jupyter/scipy-notebook)     |
+| [`datascience-notebook`](https://hub.docker.com/r/jupyter/datascience-notebook)  | ![Docker Pulls](https://img.shields.io/docker/pulls/jupyter/datascience-notebook)     |
+
+
 :::
 
-:::{.column width="50%"}
-Rocker
+:::{.column width="50%" }
+[Rocker](https://rocker-project.org/)
 
-![](/images/rocker.png){width="200px" fig-align="center" target="https://rocker-project.org/img/rocker.png"}
+![](/images/rocker.png){height="200px" fig-align="center" target="https://rocker-project.org/img/rocker.png"}
+
+| image | pulls  |
+|-------|--------|
+| [`rstudio`](versioned/rstudio.md)  | ![Docker Pulls](https://img.shields.io/docker/pulls/rocker/rstudio)     |
+| [`tidyverse`](versioned/rstudio.md)  |  ![Docker Pulls](https://img.shields.io/docker/pulls/rocker/tidyverse)   |
 :::
 ::::
 
-## Jupyter stacks
+## Dependency tree of the stack images
+
 
 ![](/images/inherit.svg){width=1200px fig-align="center" target="https://raw.githubusercontent.com/jupyter/docker-stacks/refs/heads/main/docs/images/inherit.svg"}
 
-## Running a container
+## [Running a container](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/running.html)
 
 ```bash
 docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
@@ -306,7 +319,7 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 
 ![](/images/portmapping.drawio.png){fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
 
-## Docker image search
+## Registry
 
 - Docker Hub web interface: [https://hub.docker.com/search?q=jupyter](https://hub.docker.com/search?q=jupyter)
 - Best practices:
@@ -376,8 +389,6 @@ docker run -it -p 8888:8888 ^
 :::
 
 
-## How Bind Mounts Work?
-
 - Specify a host path and a container path.
 - Docker mounts the host path into the container at runtime.
 
@@ -385,11 +396,12 @@ docker run -it -p 8888:8888 ^
 
 :::: {.columns}
 ::: {.column width="40%"}
+Host
 ![](/images/HostFileSystem.png){width="400px" fig-align="center"}
 :::
 
 :::{.column width="60%"}
-
+Container
 ![](/images/ContainerFilesystem.png){width="600px" fig-align="center"}
 :::
 ::::
