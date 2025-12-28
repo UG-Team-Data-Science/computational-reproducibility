@@ -118,16 +118,73 @@ Computational reproducibility means that research results obtained through compu
 | - **Ports** | - **Networking** |
 | - **etc.** | - **Docker daemon** |
 
-## How to run the visualizations?
+## Preparing our reproducible workspace
+
+1. Open a terminal
+
+::: {.panel-tabset}
+#### Linux (bash)
+
+```bash
+# Display the current working directory
+pwd
+# Create a new folder `shared`
+mkdir shared
+```
+
+#### PowerShell
+
+```powershell
+# Display the current working directory
+Get-Location    # or: pwd
+
+# Create a new folder `shared`
+New-Item -ItemType Directory -Name shared   # or: mkdir shared
+```
+
+#### Windows CMD
+
+```bat
+REM Display the current working directory
+echo %cd%    REM or: cd
+
+REM Create a new folder `shared`
+mkdir shared    REM or: md shared
+```
+:::
+
+2. Pull the following docker image
+
+    ```bash
+    docker pull venustiano/fdvcw:27-12-25
+    ```
+3. Let the pull finish
+
+## Reproducing the book
 
 <iframe src="https://clauswilke.com/dataviz/" width="100%" height="600px"></iframe>
 
-## Running containers in Binder
+## Alternatives
 
-[![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
-[![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=lab)
+:::: {.columns}
 
-Right click on a badge and select Open link in new tab.
+::: {.column width="50%"}
+- Cloud
+
+  - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
+  - [![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=lab)
+  - GitHub codespaces
+  - HPC (Habrok)
+:::
+::: {.column width="50%"}
+
+- Locally (Window, Linux, MacOS)
+  - Pull and run the docker image
+  - Build and run the docker image
+:::
+
+
+::::
 
 ## The Binder Workflow
 
@@ -137,12 +194,55 @@ Right click on a badge and select Open link in new tab.
 
 ![](/images/binderhub-9e26d430c9c40fc4db6f858e376c15a9.svg){width=800px fig-align="center"}
 
-## When is mybinder.org appropriate?
+## Running the dataviz environment
+
+- Source code (746 forks and 3.4k stars)
+  - [https://github.com/clauswilke/dataviz](https://github.com/clauswilke/dataviz)
+  - [https://github.com/Venustiano/datavizclaus](https://github.com/Venustiano/datavizclaus) (forked)
+- MyBinder (public)
+  - [![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=rstudio)
+
+- RUG Binder
+  - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
+
+::: aside
+
+Right click on a badge and select `Open link in new tab`.
+:::
+
+## {.smaller}
+To reproduce this chapter:
+
+<iframe src="https://clauswilke.com/dataviz/histograms-density-plots.html#multiple-histograms-densities" width="100%" height="400px"></iframe>
+
+1. Open `visualizing_distributions_I.Rmd`
+2. Click on `Knit`
+
+## Binder Pro's
+
+- Launches Jupyter/R notebooks in the cloud
+- No local install needed
+- Share reproducible environments
+- Great for teaching and demos
+- Free
+- Easy to start via [https://mybinder.org/](https://mybinder.org/)
+
+## Binder Con's
+
+- Starting the environment can be slow
+- Environment is sutdown after 10 minutes inactivity
+- Few resources (2 GB in RAM)
+- No persistent storage
+- Not reliable for big groups
+
+## When is Binder appropriate?
 
 - To share a reproducible environment
 - To communicate something in an interactive manner
 - When the code and associated data are publicly available
 - When the code you want to run does not require a lot of resources
+
+# Containers in more detail
 
 ## Container architecture
 
@@ -154,10 +254,6 @@ Right click on a badge and select Open link in new tab.
 ![](/images/container-what-is-container-1110x961.png){ width=800px fig-align="center" target="https://www.docker.com/app/uploads/2021/11/container-what-is-container-1110x961.png" }
 :::
 :::
-
-## Container Lifecycle
-
-![](/images/container_lifecycle.png){width=800px fig-align="center" target="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgevspybo00m3a7l4hfrz.png"}
 
 ## Installing Docker (macOS, Linux, Windows)
 
@@ -190,13 +286,21 @@ Hello from Docker!
  https://docs.docker.com/get-started/
 ```
 
-## Listing Containers and Images
+## Containers and Images 
+
+- An `image` is a read-only, versioned filesystem template (layers) with metadata (env defaults) **used to create containers**. 
+
+- A `container` is a running (or stopped) instance of an image: a process with **isolated filesystem**, networking, and resources, **created from an image**.
 
 ```bash
 docker ps            # List running containers
 docker ps -a         # List all containers (including stopped)
 docker images        # List all images
 ```
+
+## Container Lifecycle
+
+![](/images/container_lifecycle.png){width=800px fig-align="center" target="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgevspybo00m3a7l4hfrz.png"}
 
 ## Having fun with Containers
 
