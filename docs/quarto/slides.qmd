@@ -298,30 +298,58 @@ docker ps -a         # List all containers (including stopped)
 docker images        # List all images
 ```
 
+## The layered filesystem
+
+![](/images/image_layers.png){fig-align="center"}
+
+## Immutable layers but the container layer
+
+![](/images/container_layers.png){fig-align="center"}
+
+
 ## Container Lifecycle
 
 ![](/images/container_lifecycle.png){width=800px fig-align="center" target="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgevspybo00m3a7l4hfrz.png"}
 
-## Having fun with Containers
+## Start the `FDV` container
 
-```bash
-docker run -it debian bash                # Start an interactive bash session
-apt update                                # Update package lists
-apt install -y cowsay fortune             # Install cowsay and fortune
-/usr/games/fortune | /usr/games/cowsay    # Enjoy!
-```
+- Run the container
 
-## Inspecting Your Docker Environment
+  ```bash
+  docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
+  ```
+- Inspect your Docker Environment
 
-Open a second terminal and run:
+  - Open a second terminal and run:
 
-```bash
-docker ps            # List running containers
-docker ps -a         # List all containers (including stopped)
-docker images        # List all images
-```
+    ```bash
+    docker ps            # List running containers
+    docker ps -a         # List all containers (including stopped)
+    docker images        # List all images
+    ```
+
+## Accessing `JupyterLab`
+
+1. Open the link similar to
+
+    ```bash
+    http://127.0.0.1:8888/lab?token=d4ac9278f5f5388e88097a3a8ebbe9401be206cfa0b83099
+    ```
+2. Open `RStudio` and knit some of the `.Rmd` files.
+
+::: {.callout .callout-warning}
+**Warning:** `Changes made inside the container layer are ephemeral` — they will be lost when the container is rebuilt or restarted. 
+:::
+
+## Port mapping
+
+![](/images/portmapping.drawio.png){fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
 
 ## Stopping Containers
+
+Via `JupyterLab`, `Menu`-> `File` -> `Shut Down`
+
+Via the command line:
 
 ```bash
 docker ps                     # List running containers
@@ -340,6 +368,121 @@ docker images                 # List all images
 docker rmi <image_id>         # Remove an image by ID
 docker rmi <image_name>       # Remove an image by name
 ```
+
+- Remove all the `fdvcw` containers
+
+
+## Persistent storage (volumes)
+
+![](/images/docker-storage.png){width=500px fig-align="center" target="https://iamachs.com/images/posts/docker/part-5-understanding-docker-storage-and-volumes/docker-storage.png"}
+
+## What are Bind Mounts? {.smaller}
+
+![](/images/ChatGPT_Image_Oct_27_2025_10_37_27_PM.png){width=600px, fig-align="center"}
+
+*Image credit: OpenAI ChatGPT*
+
+
+- Bind mounts map a file or directory from the host into a container.
+- Changes on the host are reflected in the container and vice versa.
+
+## Host vs. Container filesystems
+
+:::: {.columns}
+::: {.column width="40%"}
+Host
+![](/images/HostFileSystem.png){width="400px" fig-align="center"}
+:::
+
+:::{.column width="60%"}
+Container
+![](/images/ContainerFilesystem.png){width="600px" fig-align="center"}
+:::
+::::
+
+## How to use Bind Mounts
+
+::: {.panel-tabset}
+#### Linux (bash)
+
+```bash
+docker run -it -p 8888:8888 \
+  -v "$PWD":/home/jovyan/work \
+  venustiano/fdvcw:27-12-25
+```
+
+#### PowerShell
+
+```powershell
+docker run -it -p 8888:8888 `
+  -v "${PWD}:/home/jovyan/work" `
+  venustiano/fdvcw:27-12-25
+```
+
+#### Windows CMD
+
+```bat
+docker run -it -p 8888:8888 ^
+  -v "%cd%:/home/jovyan/work" ^
+  venustiano/fdvcw:27-12-25
+```
+:::
+
+
+- Specify a host path and a container path.
+- Docker mounts the host path into the container at runtime.
+
+## Store 100 numpy exercises
+
+1. Once in JupyterLab, open a terminal and run:
+
+```bash
+cd work
+git clone https://github.com/rougier/numpy-100.git
+pip install mdutils
+```
+
+2. Double-click on `100_numpy_exercises.ipynb` to open the notebook.
+3. Have some fun!
+4. In the menu, click on `File` then on `Shut Down` to stop the server.
+
+
+##
+```bash
+docker run -it -p 8888:8888 -v $(pwd):/home/jovyan/local_workspace venustiano/fdvcw:27-12-25
+```
+
+## Creating images: Interactive vs Dockerfile {.smaller}
+
+::: columns
+::: column
+### Interactive
+- Fast for exploration and debugging
+- Low setup overhead — good for one-off tests
+- Can be useful when iterating quickly
+- **Con:** changes live in the container layer and are ephemeral
+- **Con:** steps are easy to forget, which hurts reproducibility
+:::
+::: column
+### Dockerfile (declarative)
+- Reproducible and versionable 
+- Automatable and CI/CD friendly
+- Easier to review and share with collaborators
+- **Con:** higher upfront effort and learning curve
+- **Con:** you must rebuild the image to apply changes
+:::
+:::
+
+## Having fun with Containers
+
+```bash
+docker run -it debian bash                # Start an interactive bash session
+apt update                                # Update package lists
+apt install -y cowsay fortune             # Install cowsay and fortune
+/usr/games/fortune | /usr/games/cowsay    # Enjoy!
+```
+
+
 
 ## Understanding the container registry
 
@@ -391,19 +534,6 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 #         http://127.0.0.1:8888/lab?token=d4ac9278f5f5388e88097a3a8ebbe9401be206cfa0b83099
 ```
 
-## 100 numpy exercises
-
-1. Once in JupyterLab, open a terminal and run:
-
-```bash
-cd work
-git clone https://github.com/rougier/numpy-100.git
-pip install mdutils
-```
-
-2. Double-click on `100_numpy_exercises.ipynb` to open the notebook.
-3. Have some fun!
-4. In the menu, click on `File` then on `Shut Down` to stop the server.
 
 ## Understanding the command
 
@@ -418,10 +548,6 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 |       +-- Run a container
 +-- Docker command
 ```
-
-## Port mapping
-
-![](/images/portmapping.drawio.png){fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
 
 ## Registry
 
@@ -449,63 +575,3 @@ docker start --attach -i eca4aa01751c
 docker rm eca4aa01751c
 # eca4aa01751c
 ```
-
-## Persistent storage (volumes)
-
-![](/images/docker-storage.png){width=500px fig-align="center" target="https://iamachs.com/images/posts/docker/part-5-understanding-docker-storage-and-volumes/docker-storage.png"}
-
-## What are Bind Mounts? {.smaller}
-
-![](/images/ChatGPT_Image_Oct_27_2025_10_37_27_PM.png){width=600px, fig-align="center"}
-
-*Image credit: OpenAI ChatGPT*
-
-
-- Bind mounts map a file or directory from the host into a container.
-- Changes on the host are reflected in the container and vice versa.
-
-## How to use Bind Mounts
-
-::: {.panel-tabset}
-#### Linux (bash)
-
-```bash
-docker run -it -p 8888:8888 \
-  -v "$PWD":/home/jovyan/work \
-  quay.io/jupyter/scipy-notebook:2025-03-14
-```
-
-#### PowerShell
-
-```powershell
-docker run -it -p 8888:8888 `
-  -v "${PWD}:/home/jovyan/work" `
-  quay.io/jupyter/scipy-notebook:2025-03-14
-```
-
-#### Windows CMD
-
-```bat
-docker run -it -p 8888:8888 ^
-  -v "%cd%:/home/jovyan/work" ^
-  quay.io/jupyter/scipy-notebook:2025-03-14
-```
-:::
-
-
-- Specify a host path and a container path.
-- Docker mounts the host path into the container at runtime.
-
-## Host vs. Container filesystems
-
-:::: {.columns}
-::: {.column width="40%"}
-Host
-![](/images/HostFileSystem.png){width="400px" fig-align="center"}
-:::
-
-:::{.column width="60%"}
-Container
-![](/images/ContainerFilesystem.png){width="600px" fig-align="center"}
-:::
-::::
