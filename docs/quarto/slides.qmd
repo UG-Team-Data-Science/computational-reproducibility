@@ -311,6 +311,15 @@ docker images        # List all images
 
 ![](/images/container_lifecycle.png){width=800px fig-align="center" target="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgevspybo00m3a7l4hfrz.png"}
 
+## Having fun with Containers
+
+```bash
+docker run -it debian bash                # Start an interactive bash session
+apt update                                # Update package lists
+apt install -y cowsay fortune             # Install cowsay and fortune
+/usr/games/fortune | /usr/games/cowsay    # Enjoy!
+```
+
 ## Start the `FDV` container
 
 - Run the container
@@ -343,20 +352,24 @@ docker images        # List all images
 
 ## Port mapping
 
-![](/images/portmapping.drawio.png){fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
+```bash
+docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
+```
+
+![](/images/portmapping.drawio.png){height=60% fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
 
 ## Stopping Containers
 
-Via `JupyterLab`, `Menu`-> `File` -> `Shut Down`
+- Via `JupyterLab`, `Menu`-> `File` -> `Shut Down`
 
-Via the command line:
+- Via the command line:
 
-```bash
-docker ps                     # List running containers
-docker stop <container_id>    # Stop a running container
-docker stop <container_name>  # Stop a running container
-docker ps                     # Verify the container has stopped
-```
+  ```bash
+  docker ps                     # List running containers
+  docker stop <container_id>    # Stop a running container
+  docker stop <container_name>  # Stop a running container
+  docker ps                     # Verify the container has stopped
+  ```
 
 ## Removing Containers and Images
 
@@ -407,7 +420,7 @@ Container
 
 ```bash
 docker run -it -p 8888:8888 \
-  -v "$PWD":/home/jovyan/work \
+  -v "$PWD":/home/jovyan/bind_folder \
   venustiano/fdvcw:27-12-25
 ```
 
@@ -415,7 +428,7 @@ docker run -it -p 8888:8888 \
 
 ```powershell
 docker run -it -p 8888:8888 `
-  -v "${PWD}:/home/jovyan/work" `
+  -v "${PWD}:/home/jovyan/bind_folder" `
   venustiano/fdvcw:27-12-25
 ```
 
@@ -423,21 +436,22 @@ docker run -it -p 8888:8888 `
 
 ```bat
 docker run -it -p 8888:8888 ^
-  -v "%cd%:/home/jovyan/work" ^
+  -v "%cd%:/home/jovyan/bind_folder" ^
   venustiano/fdvcw:27-12-25
 ```
 :::
 
 
 - Specify a host path and a container path.
-- Docker mounts the host path into the container at runtime.
+- Docker mounts the host path into the container path at runtime.
+- Changes on the host are reflected in the container and vice versa.
 
 ## Store 100 numpy exercises
 
 1. Once in JupyterLab, open a terminal and run:
 
 ```bash
-cd work
+cd bind_folder
 git clone https://github.com/rougier/numpy-100.git
 pip install mdutils
 ```
@@ -447,14 +461,9 @@ pip install mdutils
 4. In the menu, click on `File` then on `Shut Down` to stop the server.
 
 
-##
-```bash
-docker run -it -p 8888:8888 -v $(pwd):/home/jovyan/local_workspace venustiano/fdvcw:27-12-25
-```
+## Creating images {.smaller}
 
-## Creating images: Interactive vs Dockerfile {.smaller}
-
-::: columns
+:::: columns
 ::: column
 ### Interactive
 - Fast for exploration and debugging
@@ -471,18 +480,40 @@ docker run -it -p 8888:8888 -v $(pwd):/home/jovyan/local_workspace venustiano/fd
 - **Con:** higher upfront effort and learning curve
 - **Con:** you must rebuild the image to apply changes
 :::
-:::
+::::
 
-## Having fun with Containers
+## Building an image from a container
 
 ```bash
-docker run -it debian bash                # Start an interactive bash session
-apt update                                # Update package lists
-apt install -y cowsay fortune             # Install cowsay and fortune
-/usr/games/fortune | /usr/games/cowsay    # Enjoy!
+# Commit a container (running or stopped) to a new image
+docker commit <CONTAINER_ID_or_NAME> myimage:latest
+```
+Example:
+```bash
+# Display ID and Name
+docker ps
+# Create the image 
+docker commit <CONTAINER_ID_or_NAME> myfdvimage:mdutils
 ```
 
+## Building an image from a `Dockerfile`
 
+```bash
+# Build using Dockerfile in current directory (DO NOT RUN)
+docker build -t myimage:latest .
+
+# Specify Dockerfile path and context
+docker build -f ./path/to/Dockerfile -t myrepo/myimage:1.0 ./path/to/context
+```
+
+- `-f`: specify the Dockerfile path to use. 
+- `-t`: tag the built image (`name[:tag]`).
+- `context`: the directory sent to the builder (last argument), — Docker sends the entire context to the daemon, so `keep it minimal`.
+
+##
+```bash
+docker run -it -p 8888:8888 -v $(pwd):/home/jovyan/bind_folder venustiano/fdvcw:27-12-25
+```
 
 ## Understanding the container registry
 
