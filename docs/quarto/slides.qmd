@@ -496,6 +496,44 @@ docker ps
 docker commit <CONTAINER_ID_or_NAME> myfdvimage:mdutils
 ```
 
+
+
+## Dockerfile example {.smaller}
+
+```bash
+# Purpose: extend venustiano/fdvcw:27-12-25 and install the `mdutils` Python package.
+
+FROM venustiano/fdvcw:27-12-25                    # <1>
+RUN pip install --no-cache-dir mdutils && \       # <2>
+    fix-permissions "${CONDA_DIR}" && \           # <3>
+    fix-permissions "/home/${NB_USER}"            # <4>
+```
+
+1. Sets the base image
+2. System-wide pip installation, `--no-cache-dir` tells pip not to keep wheel/cache files
+3. Ensures the non-root notebook user can use Conda
+4. Ensures files created during the image build are writable by the `NB_USER` (notebook user) at runtime
+
+## Using a `requirements.txt` file {.smaller}
+
+```bash
+FROM venustiano/fdvcw:27-12-25                    
+
+# Install from the requirements.txt file
+COPY --chown=${NB_UID}:${NB_GID} requirements.txt /tmp/     #<1>
+RUN pip install --no-cache-dir --requirement /tmp/requirements.txt && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+```
+
+1. Copies the host file requirements.txt into the image at `/tmp/requirements.txt`
+
+- `--chown=${NB_UID}:${NB_GID}`: sets the owner and group of the copied file inside the image to the values of `NB_UID` and `NB_GID`.
+- `UID`: numeric user identifier used by the OS to represent a user (e.g., 0 = root).
+- `GID`: numeric group identifier used by the OS to represent a group.
+
+Create the `Dockerfile` and `requirements.txt` to build an image, see next slide.
+
 ## Building an image from a `Dockerfile`
 
 ```bash
@@ -510,10 +548,31 @@ docker build -f ./path/to/Dockerfile -t myrepo/myimage:1.0 ./path/to/context
 - `-t`: tag the built image (`name[:tag]`).
 - `context`: the directory sent to the builder (last argument), — Docker sends the entire context to the daemon, so `keep it minimal`.
 
+## Build the image
+
+```bash
+# 1. Make sure you have created the Dockerfile and requeriments.txt files
+ls -l
+
+# 2. Run the command
+docker build -t fdvcw:19-01-2026 .
+
+# 3. Wait and list the images
+docker images
+
+# 4. Run the container (optional)
+docker run -it -p 10000:8888 venustiano/fdvcw:27-12-25    #<4>
+
+# 5. Access JupyterLab, make sure you use port 10000 in the url
+```
+
+4. `-p 10000:8888`: Makes sure the port is mapped to the port `10000` in case `8888` is already in use.
+
 ##
 ```bash
 docker run -it -p 8888:8888 -v $(pwd):/home/jovyan/bind_folder venustiano/fdvcw:27-12-25
 ```
+# Container registries
 
 ## Understanding the container registry
 
