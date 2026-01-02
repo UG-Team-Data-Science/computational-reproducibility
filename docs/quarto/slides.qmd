@@ -93,20 +93,6 @@ Computational reproducibility means that research results obtained through compu
 
 # Reproducible Research with Containers
 
-## Why docker containers?
-
-- **Con:** costs time
-- **Pro:** can save you time
-
-## State of the Art
-
-- Docker
-- Singularity/Apptainer
-- ReproZip
-- Guix
-- CodeOcean
-- **Binder**
-- **GitHub Codespaces**
 
 ## Container Terminology
 
@@ -215,7 +201,7 @@ To reproduce this chapter:
 
 <iframe src="https://clauswilke.com/dataviz/histograms-density-plots.html#multiple-histograms-densities" width="100%" height="400px"></iframe>
 
-1. Open `visualizing_distributions_I.Rmd`
+1. Open `visualizing_distributions_I.Rmd` in Rstudio
 2. Click on `Knit`
 
 ## Binder Pro's
@@ -302,7 +288,7 @@ docker images        # List all images
 
 ![](/images/image_layers.png){fig-align="center"}
 
-## Immutable layers but the container layer
+## The container layer
 
 ![](/images/container_layers.png){fig-align="center"}
 
@@ -318,6 +304,20 @@ docker run -it debian bash                # Start an interactive bash session
 apt update                                # Update package lists
 apt install -y cowsay fortune             # Install cowsay and fortune
 /usr/games/fortune | /usr/games/cowsay    # Enjoy!
+```
+<br>
+
+```bash
+/ Living your life is a task so          \
+| difficult, it has never been attempted |
+\ before.                                /
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
 ```
 
 ## Start the `FDV` container
@@ -371,6 +371,24 @@ docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
   docker ps                     # Verify the container has stopped
   ```
 
+## Restarting or removing a container
+
+```bash
+# list containers
+docker ps --all
+# CONTAINER ID   IMAGE                                       COMMAND                  CREATED              STATUS                     PORTS     NAMES
+# eca4aa01751c   quay.io/jupyter/scipy-notebook:2025-03-14   "tini -g -- start-no…"   About a minute ago   Exited (0) 5 seconds ago             silly_panini
+
+# start the stopped container
+docker start --attach -i eca4aa01751c
+# Entered start.sh with args: jupyter lab
+# ...
+
+# remove the stopped container
+docker rm eca4aa01751c
+# eca4aa01751c
+```
+
 ## Removing Containers and Images
 
 ```bash
@@ -384,6 +402,7 @@ docker rmi <image_name>       # Remove an image by name
 
 - Remove all the `fdvcw` containers
 
+# Volumes
 
 ## Persistent storage (volumes)
 
@@ -420,29 +439,33 @@ Container
 
 ```bash
 docker run -it -p 8888:8888 \
-  -v "$PWD":/home/jovyan/bind_folder \
+  -v "$PWD":/home/jovyan/bind_folder \    # <1>
   venustiano/fdvcw:27-12-25
 ```
+1. Specify a host path and a container path.
 
 #### PowerShell
 
 ```powershell
 docker run -it -p 8888:8888 `
-  -v "${PWD}:/home/jovyan/bind_folder" `
+  -v "${PWD}:/home/jovyan/bind_folder" `    # <1>
   venustiano/fdvcw:27-12-25
 ```
+1. Specify a host path and a container path.
 
 #### Windows CMD
 
 ```bat
 docker run -it -p 8888:8888 ^
-  -v "%cd%:/home/jovyan/bind_folder" ^
+  -v "%cd%:/home/jovyan/bind_folder" ^      #<1>
   venustiano/fdvcw:27-12-25
 ```
+
+1. Specify a host path and a container path.
+
 :::
 
 
-- Specify a host path and a container path.
 - Docker mounts the host path into the container path at runtime.
 - Changes on the host are reflected in the container and vice versa.
 
@@ -460,6 +483,7 @@ pip install mdutils
 3. Have some fun!
 4. In the menu, click on `File` then on `Shut Down` to stop the server.
 
+# Images
 
 ## Creating images {.smaller}
 
@@ -488,14 +512,14 @@ pip install mdutils
 # Commit a container (running or stopped) to a new image
 docker commit <CONTAINER_ID_or_NAME> myimage:latest
 ```
+<br>
 Example:
 ```bash
 # Display ID and Name
-docker ps
-# Create the image 
+docker ps -a
+# Create the image, replace the text between <> 
 docker commit <CONTAINER_ID_or_NAME> myfdvimage:mdutils
 ```
-
 
 
 ## Dockerfile example {.smaller}
@@ -507,7 +531,10 @@ FROM venustiano/fdvcw:27-12-25                    # <1>
 RUN pip install --no-cache-dir mdutils && \       # <2>
     fix-permissions "${CONDA_DIR}" && \           # <3>
     fix-permissions "/home/${NB_USER}"            # <4>
+
+
 ```
+
 
 1. Sets the base image
 2. System-wide pip installation, `--no-cache-dir` tells pip not to keep wheel/cache files
@@ -524,9 +551,13 @@ COPY --chown=${NB_UID}:${NB_GID} requirements.txt /tmp/     #<1>
 RUN pip install --no-cache-dir --requirement /tmp/requirements.txt && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+
 ```
 
 1. Copies the host file requirements.txt into the image at `/tmp/requirements.txt`
+
+<br>
 
 - `--chown=${NB_UID}:${NB_GID}`: sets the owner and group of the copied file inside the image to the values of `NB_UID` and `NB_GID`.
 - `UID`: numeric user identifier used by the OS to represent a user (e.g., 0 = root).
@@ -561,22 +592,65 @@ docker build -t fdvcw:19-01-2026 .
 docker images
 
 # 4. Run the container (optional)
-docker run -it -p 10000:8888 venustiano/fdvcw:27-12-25    #<4>
+docker run -it -p 10000:8888 venustiano/fdvcw:19-01-2026    #<4>
 
 # 5. Access JupyterLab, make sure you use port 10000 in the url
 ```
 
 4. `-p 10000:8888`: Makes sure the port is mapped to the port `10000` in case `8888` is already in use.
 
-##
+## Removing the container automatically
 ```bash
-docker run -it -p 8888:8888 -v $(pwd):/home/jovyan/bind_folder venustiano/fdvcw:27-12-25
+docker run --rm -it -p 8888:8888 \                  # <1>
+  -v $(pwd):/home/jovyan/bind_folder venustiano/fdvcw:19-01-2026
 ```
+1. The `--rm` flag removes the container when the container is shutdown.
+
+## Dockerfile (common keywords) {.smaller}
+
+```bash
+FROM python:2.7
+RUN mkdir -p /app
+WORKDIR /app
+COPY ./requirements.txt /app/
+RUN pip install -r requirements.txt
+CMD ["python", "main.py"]
+```
+<br>
+
+| Instruction | Description |
+| --- | --- |
+| `FROM` | Create a new build stage from a base image. |
+| `RUN`| Execute build commands. |
+| `WORKDIR`  | Change working directory. |
+| `COPY`  | Copy files and directories. |
+| `CMD` | Specify default commands when container starts |
+
+:::aside
+[Dockerfile reference](https://docs.docker.com/reference/dockerfile/)
+:::
+
+## Dockerfile vs layers
+
+![](/images/dockerfile_layers.png){width="600px" fig-align="center"}
+
+
 # Container registries
 
 ## Understanding the container registry
 
 ![](/images/Docker-hub-registry-768.webp){width=800px fig-align="center" target="https://media.geeksforgeeks.org/wp-content/uploads/20240513153832/Docker-hub-registry-768.webp"}
+
+## Public Container Registries {.smaller}
+
+- [Docker Hub](https://hub.docker.com) — central public registry for container images.
+- [Quay.io](https://quay.io) — Red Hat's container registry and image security features.
+- [GitHub Container Registry (ghcr.io)](https://ghcr.io) — GitHub's registry for container images.
+- [Google Artifact Registry / Container Registry](https://cloud.google.com/container-registry) — Google's container registries.
+- [Amazon ECR Public](https://public.ecr.aws) — AWS public container registry.
+- [Microsoft Container Registry (MCR)](https://mcr.microsoft.com) — Microsoft-hosted container images.
+
+<!-- Slide end -->
 
 ## Ready to use environments
 
@@ -648,20 +722,4 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 	- Always use specific tags
 	- Avoid `latest` tag for reproducibility
 
-## Restarting or removing a container
 
-```bash
-# list containers
-docker ps --all
-# CONTAINER ID   IMAGE                                       COMMAND                  CREATED              STATUS                     PORTS     NAMES
-# eca4aa01751c   quay.io/jupyter/scipy-notebook:2025-03-14   "tini -g -- start-no…"   About a minute ago   Exited (0) 5 seconds ago             silly_panini
-
-# start the stopped container
-docker start --attach -i eca4aa01751c
-# Entered start.sh with args: jupyter lab
-# ...
-
-# remove the stopped container
-docker rm eca4aa01751c
-# eca4aa01751c
-```
