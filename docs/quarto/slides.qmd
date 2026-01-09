@@ -307,7 +307,7 @@ apt install -y cowsay fortune             # Install cowsay and fortune
 ```
 <br>
 
-```bash
+```
 / Living your life is a task so          \
 | difficult, it has never been attempted |
 \ before.                                /
@@ -318,6 +318,11 @@ apt install -y cowsay fortune             # Install cowsay and fortune
                 ||----w |
                 ||     ||
 
+```
+<br>
+
+```bash
+exit                                      # Stop/exit the container
 ```
 
 ## Start the `FDV` container
@@ -346,11 +351,13 @@ apt install -y cowsay fortune             # Install cowsay and fortune
     ```
 2. Open `RStudio` and knit some of the `.Rmd` files.
 
+3. Optional, open the `selectedfigures/temp-ridgeline_5.4.R` and run the script in `Rstudio`.
+
 ::: {.callout .callout-warning}
 **Warning:** `Changes made inside the container layer are ephemeral` — they will be lost when the container is rebuilt or restarted. 
 :::
 
-## Port mapping
+## `host:container` port mapping
 
 ```bash
 docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
