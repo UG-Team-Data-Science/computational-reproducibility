@@ -12,6 +12,7 @@ format:
     logo: images/dcc_logo2.png
     css: slides.css
     theme: simple
+    chalkboard: true
     slide-number: true
     transition: fade
     incremental: false
@@ -490,15 +491,15 @@ pip install mdutils
 3. Have some fun!
 4. In the menu, click on `File` then on `Shut Down` to stop the server.
 
-# Images
+# Docker Images
 
 ## Creating images {.smaller}
 
 :::: columns
 ::: column
 ### Interactive
-- Fast for exploration and debugging
-- Low setup overhead — good for one-off tests
+- `Fast for exploration and debugging`
+- Low setup overhead — `good for one-off tests`
 - Can be useful when iterating quickly
 - **Con:** changes live in the container layer and are ephemeral
 - **Con:** steps are easy to forget, which hurts reproducibility
@@ -508,8 +509,8 @@ pip install mdutils
 - Reproducible and versionable 
 - Automatable and CI/CD friendly
 - Easier to review and share with collaborators
-- **Con:** higher upfront effort and learning curve
-- **Con:** you must rebuild the image to apply changes
+- **Con:** `higher upfront effort and learning curve`
+- **Con:** `you must rebuild the image to apply changes`
 :::
 ::::
 
@@ -528,8 +529,26 @@ docker ps -a
 docker commit <CONTAINER_ID_or_NAME> myfdvimage:mdutils
 ```
 
+## Building an image using a Dockerfile
 
-## Dockerfile example {.smaller}
+1. Create a `cowsay` folder
+2. In that folder, create a `Dockerfile` file with the following content
+
+    ```bash
+    FROM debian
+    RUN apt-get update && apt-get install -y cowsay fortune
+    ```
+3. Build the image running
+
+    ```bash
+    docker build -t test/cowsay .
+    ```
+
+::: aside
+Make sure you are in the `cowsay` folder before running the command
+:::
+
+## A `Dockerfile` for our environment 
 
 ```bash
 # Purpose: extend venustiano/fdvcw:27-12-25 and install the `mdutils` Python package.
@@ -542,11 +561,17 @@ RUN pip install --no-cache-dir mdutils && \       # <2>
 
 ```
 
-
 1. Sets the base image
 2. System-wide pip installation, `--no-cache-dir` tells pip not to keep wheel/cache files
 3. Ensures the non-root notebook user can use Conda
 4. Ensures files created during the image build are writable by the `NB_USER` (notebook user) at runtime
+
+::: aside
+Create the `Dockerfile` and folder to build the image
+```bash
+docker build -t fdvcw:19-01-2026 .
+```
+:::
 
 ## Using a `requirements.txt` file {.smaller}
 
