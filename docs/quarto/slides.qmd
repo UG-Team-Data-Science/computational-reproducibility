@@ -754,4 +754,15 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 	- Always use specific tags
 	- Avoid `latest` tag for reproducibility
 
+## Publish docker images
+
+## Docker containers in the cloud
+
+  - Binder
+  - GitHub codespaces
+
+## Containers in HPC
+
+  - Apptainers
+
 
