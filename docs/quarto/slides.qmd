@@ -105,6 +105,12 @@ Computational reproducibility means that research results obtained through compu
 | - **Ports** | - **Networking** |
 | - **etc.** | - **Docker daemon** |
 
+## Installing Docker (macOS, Linux, Windows)
+
+- [Docker Desktop (macOS)](https://docs.docker.com/desktop/setup/install/mac-install/)
+- [Docker Desktop (Linux)](https://docs.docker.com/desktop/setup/install/linux/)
+- [Docker Desktop (Windows)](https://docs.docker.com/desktop/setup/install/windows-install/)
+
 ## Preparing our reproducible workspace
 
 1. Open a terminal
@@ -242,11 +248,7 @@ To reproduce this chapter:
 :::
 :::
 
-## Installing Docker (macOS, Linux, Windows)
 
-- [Docker Desktop (macOS)](https://docs.docker.com/desktop/setup/install/mac-install/)
-- [Docker Desktop (Linux)](https://docs.docker.com/desktop/setup/install/linux/)
-- [Docker Desktop (Windows)](https://docs.docker.com/desktop/setup/install/windows-install/)
 
 ## Running Containers {data-auto-animate=true}
 
