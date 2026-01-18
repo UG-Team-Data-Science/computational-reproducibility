@@ -775,20 +775,82 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 
 1. Build the image
 2. Tag the image
-3. Log in
+  ```bash
+  docker image tag my-username/my-image:tag another-username/another-image:v1
+  ```
+3. Log in, if needed [Create an account](https://app.docker.com/signup)
+  ```bash
+  docker login -u <my-username>
+  ```
 4. Push the image
+  ```bash
+  docker push my-username/my-image
+  ```
 
 ::: aside
 [Build, tag and publish an image](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/)
 :::
 
-## Docker containers in the cloud
+# Running containers in the cloud
 
-  - Binder
-  - GitHub codespaces
+## Binder
 
-## Containers in HPC
+The [RUG Binder](https://jupyterhub.app.rug.nl) features
 
-  - Apptainers
+- 2FA
+- 5GB of persisten storage
+- 3 simultaneous instances (running containers)
+- 2 GB in RAM
+- Must delete stopped containers
+
+::: aside
+
+The badge below opens the FDV environment on the RUG Binder platform:
+
+- [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
+:::
+
+## GitHub codespaces {.smaller}
+
+
+- Cloud-based development environments
+- Run VS Code and JupyterLab in your browser
+- Pre-configured for your project
+- No local setup needed
+- Code, build, and test from anywhere
+- Great for collaboration and reproducibility
+
+::: aside
+Resources
+
+- [Quickstart for GitHub Codespaces](https://docs.github.com/en/codespaces/quickstart)
+- [Deep dive into GitHub Codespaces](https://docs.github.com/en/codespaces/about-codespaces/deep-dive)
+- [Introduction to GitHub Codespaces](https://www.datacamp.com/tutorial/github-codespaces)
+:::
+
+
+
+## Running FDV in codespaces
+
+![](/images/configuration-as-code.webp){width=800px fig-align="center"}
+
+[https://github.com/Venustiano/datavizclaus/tree/fdvcwcontainer](https://github.com/Venustiano/datavizclaus/tree/fdvcwcontainer)
+
+## GitHub Benefits
+
+- [GitHub Student Developer Pack](https://education.github.com/pack)
+- [Students - GitHub Education](https://github.com/education/students)
+- [Teachers - GitHub Education](https://github.com/education/teachers)
+
+
+# Containers in HPC (advanced)
+
+## Apptainers
+
+- Basic architecture of `Habrok`
+- Convert Docker containers into Apptainer containers
+- Request resources, RAM, Nodes, GPUs
+- Run jobs
+- Port forwarding
 
 
