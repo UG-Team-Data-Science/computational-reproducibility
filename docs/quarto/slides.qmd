@@ -550,7 +550,7 @@ docker commit <CONTAINER_ID_or_NAME> myfdvimage:mdutils
 Make sure you are in the `cowsay` folder before running the command
 :::
 
-## A `Dockerfile` for our environment 
+## A `Dockerfile` for our environment {.smaller}
 
 ```bash
 # Purpose: extend venustiano/fdvcw:27-12-25 and install the `mdutils` Python package.
@@ -570,9 +570,21 @@ RUN pip install --no-cache-dir mdutils && \       # <2>
 
 ::: aside
 Create the `Dockerfile` and folder to build the image
+
+::: {.panel-tabset}
+#### Linux/Windows
+
 ```bash
-docker build -t fdvcw:19-01-2026 .
+docker build -t fdvcw:20-01-2026 .
 ```
+
+#### macOS (arm)
+
+```bash
+docker build --platform linux/amd64 -t fdvcw:20-01-2026 .
+```
+:::
+
 :::
 
 ## Using a `requirements.txt` file {.smaller}
@@ -620,6 +632,8 @@ docker build -f ./path/to/Dockerfile -t myrepo/myimage:1.0 ./path/to/context
 ls -l
 
 # 2. Run the command
+# on arm architecture
+# docker build --platform linux/amd64 -t fdvcw:20-01-2026 .
 docker build -t fdvcw:19-01-2026 .
 
 # 3. Wait and list the images
@@ -684,7 +698,15 @@ CMD ["python", "main.py"]
 - [Amazon ECR Public](https://public.ecr.aws) — AWS public container registry.
 - [Microsoft Container Registry (MCR)](https://mcr.microsoft.com) — Microsoft-hosted container images.
 
-<!-- Slide end -->
+
+## Registry
+
+- Docker Hub web interface: [https://hub.docker.com/search?q=jupyter](https://hub.docker.com/search?q=jupyter)
+- Best practices:
+	- Prefer official images
+	- Verify trusted publishers
+	- Always use specific tags
+	- Avoid `latest` tag for reproducibility
 
 ## Ready to use environments
 
@@ -747,16 +769,18 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 +-- Docker command
 ```
 
-## Registry
 
-- Docker Hub web interface: [https://hub.docker.com/search?q=jupyter](https://hub.docker.com/search?q=jupyter)
-- Best practices:
-	- Prefer official images
-	- Verify trusted publishers
-	- Always use specific tags
-	- Avoid `latest` tag for reproducibility
 
 ## Publish docker images
+
+1. Build the image
+2. Tag the image
+3. Log in
+4. Push the image
+
+::: aside
+[Build, tag and publish an image](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/)
+:::
 
 ## Docker containers in the cloud
 
