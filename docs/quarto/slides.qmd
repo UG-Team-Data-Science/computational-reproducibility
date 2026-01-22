@@ -223,7 +223,7 @@ To reproduce this chapter:
 1. Open `visualizing_distributions_I.Rmd` in Rstudio
 2. Click on `Knit`
 
-## Binder Pro's
+## Binder Pros
 
 - Launches Jupyter/R notebooks in the cloud
 - No local install needed
@@ -232,7 +232,7 @@ To reproduce this chapter:
 - Free
 - Easy to start via [https://mybinder.org/](https://mybinder.org/)
 
-## Binder Con's
+## Binder Cons
 
 - Starting the environment can be slow
 - Environment is sutdown after 10 minutes inactivity
