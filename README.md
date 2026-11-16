@@ -22,6 +22,9 @@ Explore the resources to learn how to make your research transparent, repeatable
   <span style="font-size:14px; position:relative; top:-3px;">Slides</span>
 </a>
 
+- Main slides: https://gitpages.service.rug.nl/dcc/training/computational-reproducibility/
+- November 2026 slides: https://gitpages.service.rug.nl/dcc/training/computational-reproducibility/slides-november-2026.html
+
 
 ## Test the environment in Binder
 
@@ -32,23 +35,25 @@ Binder is a playground environment where you can test the environment and code. 
     [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UG-Team-Data-Science/computational-reproducibility/HEAD)
 
 2. When the `Jupyter Lab` interface is displayed, click on the `VS Code` icon.
-3. Make some changes in the slides, for example, in `./docs/source/_sections/fundamentals.rst` (optional).
+3. Make some changes in `./docs/quarto/slides.qmd` (optional).
 4. Render the `html` slides, open a new terminal and run
     ```bash
-    cd docs
-    make revealjs
+    quarto render docs/quarto/slides.qmd
+    quarto render docs/quarto/slides-november-2026.qmd
     ```
-    The `html` slides will be saved in `./build/revealjs/index.html`
-5. Render the `pdf` slides, run
+  The rendered files will be created at:
+  - `docs/quarto/slides.html`
+  - `docs/quarto/slides-november-2026.html`
+5. Render the `pdf` slides (optional), run
     ```bash
-    make pdfslides
+  quarto render docs/quarto/slides.qmd --to pdf
     ```
-    Then the slides in `pdf` format will be in `./build/latex/slides.pdf` which can be opened via the Jupyter Lab interface. 
+  Then the PDF will be saved next to the source file in `docs/quarto/`.
 6. To inspect changes immediately run
     ```bash
-    make autobuild
+  quarto preview docs/quarto/slides.qmd
     ```
-    in the pop up `window` click on `Open in browser`. Any changes in the slides will be reflected after refreshin the tab.
+  in the pop up `window` click on `Open in browser`. Any changes in the slides will be reflected after refreshing the tab.
 
 ## Installation
 Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
@@ -100,19 +105,20 @@ Click on `VS Code`.
 
 Open a terminal `Menu->Terminal->New Terminal` and move to the `docs` folder
 ```bash
-  cd docs
+  cd docs/quarto
 ```
 Build the html slides
 ```bash
-  make revealjs
+  quarto render slides.qmd
+  quarto render slides-november-2026.qmd
 ```
 Build the pdf slides (make sure you run the above command)
 ```bash
-  make pdfslides
+  quarto render slides.qmd --to pdf
 ```
 Rebuild automatically (useful during continuous file changes)
 ```bash
-  make autobuild
+  quarto preview slides.qmd
 ```
 and follow the link on the terminal `ctrl + click`
 
