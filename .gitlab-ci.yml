@@ -3,6 +3,7 @@ pages:
   image: python:3.11
   tags:
     - docker
+  needs: []
   before_script:
     # Install build dependencies
     - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
