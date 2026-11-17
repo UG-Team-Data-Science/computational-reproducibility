@@ -153,115 +153,6 @@ mkdir shared    REM or: md shared
     ```
 3. Let the pull finish
 
-
-## Reproducing the book
-
-<iframe src="https://clauswilke.com/dataviz/" width="100%" height="600px"></iframe>
-
-## Alternatives
-
-:::: {.columns}
-
-::: {.column width="50%"}
-- Cloud
-
-  - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
-  - [![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=lab)
-  - GitHub codespaces
-  - HPC (Habrok)
-:::
-::: {.column width="50%"}
-
-- Locally (Window, Linux, MacOS)
-  - Pull and run the docker image
-  - Build and run the docker image
-:::
-
-::::
-
-## A GitHub Codespace for the FDV book
-
-1. Sign in [GitHub](https://github.com/login)
-2. Open the `fdvcwcontainer` [branch](https://github.com/Venustiano/datavizclaus/tree/fdvcwcontainer) in GitHub
-3. Click on `Code` -> `CodeSpaces` -> `+` (Create a codespace ...)
-4. The creation of the `codespace` will take some time
-5. When done, **Do not forget to stop the codespace**
-
-::: aside
-Once the codespace has been created, you can open `JupyterLab` instead of `VScode` by clicking on the dots `...` and `Open in JupyterLab`
-:::
-
-## The Binder Workflow
-
-![](/images/binder-comic-5aa62b109e2a7023a5abc80b4312ad31.png){width=800px fig-align="center"}
-
-## The BinderHub architecture
-
-![](/images/binderhub-9e26d430c9c40fc4db6f858e376c15a9.svg){width=800px fig-align="center"}
-
-## Running the dataviz environment
-
-- Source code (746 forks and 3.4k stars)
-  - [https://github.com/clauswilke/dataviz](https://github.com/clauswilke/dataviz)
-  - [https://github.com/Venustiano/datavizclaus](https://github.com/Venustiano/datavizclaus) (forked)
-- MyBinder (public)
-  - [![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=rstudio)
-
-- RUG Binder
-  - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
-
-::: aside
-
-Right click on a badge and select `Open link in new tab`.
-:::
-
-## {.smaller}
-To reproduce this chapter:
-
-<iframe src="https://clauswilke.com/dataviz/histograms-density-plots.html#multiple-histograms-densities" width="100%" height="400px"></iframe>
-
-1. Open `visualizing_distributions_I.Rmd` in Rstudio
-2. Click on `Knit`
-
-## Binder Pros
-
-- Launches Jupyter/R notebooks in the cloud
-- No local install needed
-- Share reproducible environments
-- Great for teaching and demos
-- Free
-- Easy to start via [https://mybinder.org/](https://mybinder.org/)
-
-## Binder Cons
-
-- Starting the environment can be slow
-- Environment is sutdown after 10 minutes inactivity
-- Few resources (2 GB in RAM)
-- No persistent storage
-- Not reliable for big groups
-
-## When is Binder appropriate?
-
-- To share a reproducible environment
-- To communicate something in an interactive manner
-- When the code and associated data are publicly available
-- When the code you want to run does not require a lot of resources
-
-# Containers in more detail
-
-## Container architecture
-
-::: columns
-::: column
-![](/images/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today-1110x919.png){width=100%}
-:::
-::: column
-![](/images/container-what-is-container-1110x961.png){ width=800px fig-align="center" target="https://www.docker.com/app/uploads/2021/11/container-what-is-container-1110x961.png" }
-:::
-:::
-
-
-
 ## Running Containers {data-auto-animate=true}
 
 ```bash
@@ -802,6 +693,115 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 ::: aside
 [Build, tag and publish an image](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/)
 :::
+
+
+
+## Reproducing the book
+
+<iframe src="https://clauswilke.com/dataviz/" width="100%" height="600px"></iframe>
+
+## Alternatives
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Cloud
+
+  - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
+  - [![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=lab)
+  - GitHub codespaces
+  - HPC (Habrok)
+:::
+::: {.column width="50%"}
+
+- Locally (Window, Linux, MacOS)
+  - Pull and run the docker image
+  - Build and run the docker image
+:::
+
+::::
+
+## A GitHub Codespace for the FDV book
+
+1. Sign in [GitHub](https://github.com/login)
+2. Open the `fdvcwcontainer` [branch](https://github.com/Venustiano/datavizclaus/tree/fdvcwcontainer) in GitHub
+3. Click on `Code` -> `CodeSpaces` -> `+` (Create a codespace ...)
+4. The creation of the `codespace` will take some time
+5. When done, **Do not forget to stop the codespace**
+
+::: aside
+Once the codespace has been created, you can open `JupyterLab` instead of `VScode` by clicking on the dots `...` and `Open in JupyterLab`
+:::
+
+## The Binder Workflow
+
+![](/images/binder-comic-5aa62b109e2a7023a5abc80b4312ad31.png){width=800px fig-align="center"}
+
+## The BinderHub architecture
+
+![](/images/binderhub-9e26d430c9c40fc4db6f858e376c15a9.svg){width=800px fig-align="center"}
+
+## Running the dataviz environment
+
+- Source code (746 forks and 3.4k stars)
+  - [https://github.com/clauswilke/dataviz](https://github.com/clauswilke/dataviz)
+  - [https://github.com/Venustiano/datavizclaus](https://github.com/Venustiano/datavizclaus) (forked)
+- MyBinder (public)
+  - [![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=rstudio)
+
+- RUG Binder
+  - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
+
+::: aside
+
+Right click on a badge and select `Open link in new tab`.
+:::
+
+## {.smaller}
+To reproduce this chapter:
+
+<iframe src="https://clauswilke.com/dataviz/histograms-density-plots.html#multiple-histograms-densities" width="100%" height="400px"></iframe>
+
+1. Open `visualizing_distributions_I.Rmd` in Rstudio
+2. Click on `Knit`
+
+## Binder Pros
+
+- Launches Jupyter/R notebooks in the cloud
+- No local install needed
+- Share reproducible environments
+- Great for teaching and demos
+- Free
+- Easy to start via [https://mybinder.org/](https://mybinder.org/)
+
+## Binder Cons
+
+- Starting the environment can be slow
+- Environment is sutdown after 10 minutes inactivity
+- Few resources (2 GB in RAM)
+- No persistent storage
+- Not reliable for big groups
+
+## When is Binder appropriate?
+
+- To share a reproducible environment
+- To communicate something in an interactive manner
+- When the code and associated data are publicly available
+- When the code you want to run does not require a lot of resources
+
+# Containers in more detail
+
+## Container architecture
+
+::: columns
+::: column
+![](/images/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today-1110x919.png){width=100%}
+:::
+::: column
+![](/images/container-what-is-container-1110x961.png){ width=800px fig-align="center" target="https://www.docker.com/app/uploads/2021/11/container-what-is-container-1110x961.png" }
+:::
+:::
+
 
 # Running containers in the cloud
 
