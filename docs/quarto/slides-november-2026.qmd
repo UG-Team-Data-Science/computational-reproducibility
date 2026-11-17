@@ -512,8 +512,7 @@ pip install mdutils
 :::: {.columns style="font-size: 0.8em;"}
 ::: {.column width="50%"}
 [Jupyter stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/)
-
-![](/images/jupyter-logo.svg){height="200px" fig-align="center" target="https://jupyter-docker-stacks.readthedocs.io/en/latest/_static/jupyter-logo.svg"}
+c
 
 | image | pulls  |
 |-------|--------|
@@ -536,26 +535,16 @@ pip install mdutils
 
 ---
 
-## x
+## 
 
-<iframe
-  src="./images/rocker_docker_downloads.html"
-  width="90%"
-  height="550px"
-  style="border: none;">
-</iframe>
+![](images/rocker_docker_downloads.png)
+
 
 ---
 
-## y
+## 
 
-<iframe
-  src="./images/jupyter_docker_stacks_popularity.html"
-  width="90%"
-  height="450px"
-  style="border: none;">
-</iframe>
-
+![](images/jupyter_docker_stacks_popularity.png)
 
 ---
 
