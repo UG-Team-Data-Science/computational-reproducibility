@@ -20,7 +20,7 @@ format:
 
 ## Content
 
-- Using containers for reproducible research test test
+- Using containers for reproducible research test with Docker
 - Working with containers
 	- Running
 	- Building
