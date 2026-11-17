@@ -266,7 +266,6 @@ apt update                                # Update package lists
 apt install -y cowsay fortune             # Install cowsay and fortune
 /usr/games/fortune | /usr/games/cowsay    # Enjoy!
 ```
-<br>
 
 ```
 / Living your life is a task so          \
@@ -280,11 +279,6 @@ apt install -y cowsay fortune             # Install cowsay and fortune
                 ||     ||
 
 ```
-<br>
-<!-- 
-```bash
-exit                                      # Stop/exit the container
-``` -->
 
 ::: {.callout-note}
 Press <kbd>↑</kbd> to navigate to the previous command.
@@ -307,7 +301,7 @@ Press <kbd>↑</kbd> to navigate to the previous command.
 
 ---
 
-## Restarting or removing a container
+## Restarting a container
 
 ```bash
 # list containers
@@ -349,6 +343,20 @@ docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
 ```
 
 ![](/images/portmapping.drawio.png){height=60% fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
+
+## Understanding the command
+<br>
+```bash
+docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
+|       |   |   |               |         |     |
+|       |   |   |               |         |     +-- Version tag
+|       |   |   |               |         +-- Image name
+|       |   |   |               +-- Username
+|       |   |   +-- Port mapping (host:container)
+|       |   +-- Interactive terminal
+|       +-- Run a container
++-- Docker command
+```
 
 ---
 
@@ -419,7 +427,7 @@ Source code: <https://github.com/clauswilke/dataviz>
 
 ---
 
-## What are Bind Mounts? {.smaller}
+## Bind Mounts {.smaller}
 
 ![](/images/ChatGPT_Image_Oct_27_2025_10_37_27_PM.png){width=600px, fig-align="center"}
 
@@ -431,7 +439,7 @@ Source code: <https://github.com/clauswilke/dataviz>
 
 ---
 
-## Host vs. Container filesystems
+## Host and Container filesystems
 
 :::: {.columns}
 ::: {.column width="40%"}
@@ -512,7 +520,8 @@ pip install mdutils
 :::: {.columns style="font-size: 0.8em;"}
 ::: {.column width="50%"}
 [Jupyter stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/)
-c
+
+![](/images/jupyter-logo.svg){height="200px" fig-align="center" target="https://jupyter-docker-stacks.readthedocs.io/en/latest/_static/jupyter-logo.svg"}
 
 | image | pulls  |
 |-------|--------|
@@ -548,6 +557,14 @@ c
 
 ---
 
+## Dependency tree of the stack images
+
+
+![](/images/inherit.svg){width=1200px fig-align="center" target="https://raw.githubusercontent.com/jupyter/docker-stacks/refs/heads/main/docs/images/inherit.svg"}
+
+
+---
+
 ## Creating images {.smaller}
 
 <br>
@@ -564,7 +581,6 @@ c
 ::: column
 ### Dockerfile (declarative)
 - Reproducible and versionable 
-- Automatable and CI/CD friendly
 - Easier to review and share with collaborators
 - **Con:** `higher upfront effort and learning curve`
 - **Con:** `you must rebuild the image to apply changes`
@@ -758,7 +774,7 @@ CMD ["python", "main.py"]
 
 ![](/images/dockerfile_layers.png){width="600px" fig-align="center"}
 
----
+
 
 # Container registries
 
@@ -772,6 +788,8 @@ CMD ["python", "main.py"]
 
 ## Public Container Registries {.smaller}
 
+<br>
+
 - [Docker Hub](https://hub.docker.com) — central public registry for container images.
 - [Quay.io](https://quay.io) — Red Hat's container registry and image security features.
 - [GitHub Container Registry (ghcr.io)](https://ghcr.io) — GitHub's registry for container images.
@@ -783,6 +801,8 @@ CMD ["python", "main.py"]
 
 ## Registry
 
+<br>
+
 - Docker Hub web interface: [https://hub.docker.com/search?q=jupyter](https://hub.docker.com/search?q=jupyter)
 - Best practices:
 	- Prefer official images
@@ -790,44 +810,11 @@ CMD ["python", "main.py"]
 	- Always use specific tags
 	- Avoid `latest` tag for reproducibility
 
----
-
-## Ready to use environments
-
-:::: {.columns style="font-size: 0.8em;"}
-::: {.column width="50%"}
-[Jupyter stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/)
-
-![](/images/jupyter-logo.svg){height="200px" fig-align="center" target="https://jupyter-docker-stacks.readthedocs.io/en/latest/_static/jupyter-logo.svg"}
-
-| image | pulls  |
-|-------|--------|
-| [`scipy-notebook`](https://hub.docker.com/r/scipy-notebook)  | ![Docker Pulls](https://img.shields.io/docker/pulls/jupyter/scipy-notebook)     |
-| [`datascience-notebook`](https://hub.docker.com/r/jupyter/datascience-notebook)  | ![Docker Pulls](https://img.shields.io/docker/pulls/jupyter/datascience-notebook)     |
 
 
-:::
+## [Running a container (Jupyter Stacks)](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/running.html)
 
-:::{.column width="50%" }
-[Rocker](https://rocker-project.org/)
-
-![](/images/rocker.png){height="200px" fig-align="center" target="https://rocker-project.org/img/rocker.png"}
-
-| image | pulls  |
-|-------|--------|
-| [`rstudio`](versioned/rstudio.md)  | ![Docker Pulls](https://img.shields.io/docker/pulls/rocker/rstudio)     |
-| [`tidyverse`](versioned/rstudio.md)  |  ![Docker Pulls](https://img.shields.io/docker/pulls/rocker/tidyverse)   |
-:::
-::::
-
----
-
-## Dependency tree of the stack images
-
-
-![](/images/inherit.svg){width=1200px fig-align="center" target="https://raw.githubusercontent.com/jupyter/docker-stacks/refs/heads/main/docs/images/inherit.svg"}
-
-## [Running a container](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/running.html)
+<br>
 
 ```bash
 docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
@@ -843,6 +830,8 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 ---
 
 ## Understanding the command
+
+<br>
 
 ```bash
 docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
@@ -878,24 +867,28 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 [Build, tag and publish an image](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/)
 :::
 
+# Options for running containers
 
 ---
 
-## Alternatives
+## Cloud and local options
+
+<br>
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-- Cloud
+- **Cloud**
 
   - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
   - [![Launch MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Venustiano/datavizclaus/HEAD?urlpath=lab)
   - GitHub codespaces
-  - HPC (Habrok)
+  - HPC (Hábrók)
 :::
 ::: {.column width="50%"}
 
-- Locally (Window, Linux, MacOS)
+- **Locally** 
+  - Window, Linux, MacOS
   - Pull and run the docker image
   - Build and run the docker image
 :::
@@ -904,21 +897,7 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 
 ---
 
-## A GitHub Codespace for the FDV book
-
-1. Sign in [GitHub](https://github.com/login)
-2. Open the `fdvcwcontainer` [branch](https://github.com/Venustiano/datavizclaus/tree/fdvcwcontainer) in GitHub
-3. Click on `Code` -> `CodeSpaces` -> `+` (Create a codespace ...)
-4. The creation of the `codespace` will take some time
-5. When done, **Do not forget to stop the codespace**
-
-::: aside
-Once the codespace has been created, you can open `JupyterLab` instead of `VScode` by clicking on the dots `...` and `Open in JupyterLab`
-:::
-
----
-
-## The Binder Workflow
+## Binder
 
 ![](/images/binder-comic-5aa62b109e2a7023a5abc80b4312ad31.png){width=800px fig-align="center"}
 
@@ -927,6 +906,18 @@ Once the codespace has been created, you can open `JupyterLab` instead of `VScod
 ## The BinderHub architecture
 
 ![](/images/binderhub-9e26d430c9c40fc4db6f858e376c15a9.svg){width=800px fig-align="center"}
+
+## Easy Binder example
+
+<BR>
+
+1. [Data-Visualization-with-Python Repository](https://github.com/Venustiano/dvizpy)
+
+2. Requirements file: [requirements.txt]
+
+3. [Turn a Git repo into a collection of interactive notebooks](https://mybinder.org/)
+
+4. Add a badge to your README.md file
 
 ---
 
@@ -981,18 +972,17 @@ To reproduce this chapter:
 
 ## When is Binder appropriate?
 
+<br>
+
 - To share a reproducible environment
 - To communicate something in an interactive manner
 - When the code and associated data are publicly available
 - When the code you want to run does not require a lot of resources
 
----
-
-# Running containers in the cloud
 
 ---
 
-## Binder
+##  RUG Binder
 
 The [RUG Binder](https://jupyterhub.app.rug.nl) features
 
@@ -1013,6 +1003,7 @@ The badge below opens the FDV environment on the RUG Binder platform:
 
 ## GitHub codespaces {.smaller}
 
+<br>
 
 - Cloud-based development environments
 - Run VS Code and JupyterLab in your browser
@@ -1041,22 +1032,24 @@ Resources
 
 ## GitHub Benefits
 
+<br>
+
 - [GitHub Student Developer Pack](https://education.github.com/pack)
 - [Students - GitHub Education](https://github.com/education/students)
 - [Teachers - GitHub Education](https://github.com/education/teachers)
 
 ---
 
-# Containers in HPC (advanced)
+## Apptainers in HPC
 
----
-
-## Apptainers
-
-- Basic architecture of `Habrok`
+- Basic architecture of `Hábrók`
 - Convert Docker containers into Apptainer containers
 - Request resources, RAM, Nodes, GPUs
 - Run jobs
 - Port forwarding
 
+## Open on demand in Hábrók
 
+<br>
+
+[Hábrók HPC Cluster Web Portal](https://portal.hb.hpc.rug.nl/public/start.html)
