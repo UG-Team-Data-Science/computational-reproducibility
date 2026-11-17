@@ -5,13 +5,13 @@ pages:
     - docker
   needs: []
   before_script:
-    # Install build dependencies
-    - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
-    # Install Quarto
-    - apt-get update && apt-get install -y --no-install-recommends curl gdebi-core pandoc
-    - curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.deb
-    - gdebi --non-interactive quarto-1.8.26-linux-amd64.deb
-    - rm -f quarto-1.8.26-linux-amd64.deb
+   # Install Quarto without root privileges
+  - curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-amd64.tar.gz
+  - mkdir -p "$CI_PROJECT_DIR/.quarto"
+  - tar -xzf quarto-1.8.26-linux-amd64.tar.gz -C "$CI_PROJECT_DIR/.quarto"
+  - export PATH="$CI_PROJECT_DIR/.quarto/quarto-1.8.26/bin:$PATH"
+  - quarto --version
+  - rm -f quarto-1.8.26-linux-amd64.tar.gz
   script:
     # Build reveal.js slides in docs/
     # - pip install --no-cache-dir sphinx sphinx-revealjs esbonio
@@ -20,28 +20,29 @@ pages:
     - rm -rf public
     - mkdir -p public
     # Build Quarto slides with explicit output filenames
+   
     - cd docs/quarto
-    - quarto render slides.qmd --to revealjs --output slides.html --debug
-    - quarto render slides-november-2026.qmd --to revealjs --output slides-november-2026.html --debug
+    - quarto render slides.qmd --to revealjs --output slides.html
+    - quarto render slides-november-2026.qmd --to revealjs --output slides-november-2026.html
 
-    # Publish both slide decks
+    # Publish presentations
     - cp slides.html ../../public/index.html
     - cp slides-november-2026.html ../../public/slides-november-2026.html
+
+    # Copy supporting resources
     - cp -r slides_files ../../public/slides_files 2>/dev/null || true
     - cp -r slides-november-2026_files ../../public/slides-november-2026_files 2>/dev/null || true
     - cp -r site_libs ../../public/site_libs 2>/dev/null || true
-    # Copy images referenced by the slides
     - cp -r images ../../public/images
+
     - cd ../../
-    - echo "--- PUBLIC DIR CONTENTS ---"
-    - ls -R public || echo "no public directory"
-    - echo "--- ROOT DIR CONTENTS ---"
-    - ls -la
-    # - sphinx-build -b revealjs docs/source public/sphinx
+
+    # Inspect generated website
+    - ls -R public
 
 
   artifacts:
     paths:
       - public
   rules:
-    - when: always
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
