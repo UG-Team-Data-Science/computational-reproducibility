@@ -9,9 +9,10 @@ date: "November 2026"
 date-format: "MMMM YYYY"
 format:
   revealjs:
+    mermaid:
+      theme: default
     logo: images/dcc_logo2.png
     css: slides.css
-    theme: simple
     chalkboard: true
     slide-number: true
     transition: fade
@@ -20,19 +21,24 @@ format:
 
 ## Content
 
-- Using containers for reproducible research test with Docker
+- Computational reproducibility
 - Working with containers
 	- Running
+  - Ports
 	- Building
 	- Stopping and deleting
 	- Persistent storage
-- Using containers in the cloud
+- Using containers for reproducible research 
 
 # Introduction
+
+---
 
 ## Goal
 
 Computational reproducibility means that research results obtained through computation can be consistently **re-produced** by others given the same inputs and methods.
+
+---
 
 ## The Pillars
 
@@ -42,28 +48,19 @@ Computational reproducibility means that research results obtained through compu
 - Documentation
 - Workflows
 
-## The Challenges
+
+---
+
+## The Challenges of reproducibility
 
 - Software rot
 - Data availability
 - Complexity
 - Human factors
 
-## Why reproducibility matters {.smaller}
+---
 
-- **Trust:** Verifiable results build confidence in findings.
-- **Reuse:** Reproducible workflows let others (and future-you) build on your work.
-- **Transparency:** Clear methods reduce errors and enable scrutiny.
-- **Efficiency:** Saves time by avoiding duplicated effort.
-- **Credit:** Reproducible artifacts (data, code, environments) increase reuse and citations.
-
-
-
-- **Open Science:** Share code, data, and methods openly when possible.
-- **FAIR:** Make outputs Findable, Accessible, Interoperable, and Reusable.
-
-
-## Benefits of Computational Reproducibility
+## Benefits of Reproducible Research
 
 1. Integrity and trust
 2. **Efficiency and reuse**
@@ -72,9 +69,13 @@ Computational reproducibility means that research results obtained through compu
 5. Scalability and generalization
 6. Policy and funding compliance
 
+---
+
 ## Spectrum of reproducibility
 
 ![](/images/reproducible-matrix.jpg){width=800px}
+
+---
 
 ## Tools for Computational Reproducibility
 
@@ -88,14 +89,57 @@ Computational reproducibility means that research results obtained through compu
 - Notebooks and literate programming
 - Community standards
 
+---
+
 ## Capturing Computational Environments
 
 ![](/images/computational-enviro.png){width=800px}
 
+
+
 # Reproducible Research with Containers
 
+---
+
+## Benefits of Containerization {.smaller}
+
+<br><br>
+
+- **Reproducibility:** Package code, dependencies.
+
+- **Isolation:** Separate filesystems, processes.
+
+- **Security:** Restrict access to host files and sensitive information.
+
+- **Collaboration:** Share container images instead of complex installation instructions.
+
+
+:::aside
+::: {.callout-tip}
+**Example: AI-assisted research**
+
+Run an AI agent inside a container with access only to a designated project directory, preventing unintended access to personal files, credentials, and sensitive datasets.
+:::
+:::
+
+---
+
+## Container architecture
+
+::: columns
+::: column
+![](/images/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today-1110x919.png){width=100%}
+:::
+::: column
+![](/images/container-what-is-container-1110x961.png){ width=800px fig-align="center" target="https://www.docker.com/app/uploads/2021/11/container-what-is-container-1110x961.png" }
+:::
+:::
+
+---
 
 ## Container Terminology
+
+<br>
 
 | Core objects | Supporting services |
 | --- | --- |
@@ -105,13 +149,47 @@ Computational reproducibility means that research results obtained through compu
 | - **Ports** | - **Networking** |
 | - **etc.** | - **Docker daemon** |
 
-## Installing Docker (macOS, Linux, Windows)
+
+<!-- ## Installing Docker (macOS, Linux, Windows)
 
 - [Docker Desktop (macOS)](https://docs.docker.com/desktop/setup/install/mac-install/)
 - [Docker Desktop (Linux)](https://docs.docker.com/desktop/setup/install/linux/)
-- [Docker Desktop (Windows)](https://docs.docker.com/desktop/setup/install/windows-install/)
+- [Docker Desktop (Windows)](https://docs.docker.com/desktop/setup/install/windows-install/) -->
 
-## Preparing our reproducible workspace
+## Running Containers (output) {data-auto-animate=true}
+
+```text
+docker run hello-world
+
+Hello from Docker!
+
+ This message shows that your installation appears to be working correctly.
+
+ To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ ...
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+ to your terminal.
+ ...
+ For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+---
+
+## Containers and Images 
+
+- An `image` is a read-only, versioned filesystem template (layers) with metadata (env defaults) **used to create containers**. 
+
+- A `container` is a running (or stopped) instance of an image: a process with **isolated filesystem**, networking, and resources, **created from an image**.
+
+```bash
+docker ps            # List running containers
+docker ps -a         # List all containers (including stopped)
+docker images        # List all images
+```
+
+
+<!-- ## Preparing our reproducible workspace
 
 1. Open a terminal
 
@@ -157,51 +235,50 @@ mkdir shared    REM or: md shared
 
 ```bash
 docker run hello-world
-```
+``` -->
 
-## Running Containers (output) {data-auto-animate=true}
-
-```text
-docker run hello-world
-
-Hello from Docker!
-
- This message shows that your installation appears to be working correctly.
-
- To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- ...
- 4. The Docker daemon streamed that output to the Docker client, which sent it
- to your terminal.
- ...
- For more examples and ideas, visit:
- https://docs.docker.com/get-started/
-```
-
-## Containers and Images 
-
-- An `image` is a read-only, versioned filesystem template (layers) with metadata (env defaults) **used to create containers**. 
-
-- A `container` is a running (or stopped) instance of an image: a process with **isolated filesystem**, networking, and resources, **created from an image**.
-
-```bash
-docker ps            # List running containers
-docker ps -a         # List all containers (including stopped)
-docker images        # List all images
-```
 
 ## The layered filesystem
 
 ![](/images/image_layers.png){fig-align="center"}
 
+---
+
 ## The container layer
 
 ![](/images/container_layers.png){fig-align="center"}
 
+---
+
+
+## Docker Image: Layered Filesystem
+
+```{mermaid}
+flowchart TB
+    A["Application layer<br/>COPY / RUN"]
+    B["Dependencies layer<br/>Python, libraries"]
+    C["Runtime layer<br/>Ubuntu / Debian"]
+    D["Base image layer"]
+
+    A --> B --> C --> D
+
+    E["Container writable layer"]
+    A -.-> E
+
+    style A fill:#d5e8d4,stroke:#82b366
+    style B fill:#dae8fc,stroke:#6c8ebf
+    style C fill:#fff2cc,stroke:#d6b656
+    style D fill:#f8cecc,stroke:#b85450
+    style E fill:#e1d5e7,stroke:#9673a6
+  ```
+
+---
 
 ## Container Lifecycle
 
 ![](/images/container_lifecycle.png){width=800px fig-align="center" target="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgevspybo00m3a7l4hfrz.png"}
+
+---
 
 ## Having fun with Containers
 
@@ -231,6 +308,8 @@ apt install -y cowsay fortune             # Install cowsay and fortune
 exit                                      # Stop/exit the container
 ```
 
+---
+
 ## Start the `FDV` container
 
 - Run the container
@@ -248,6 +327,8 @@ exit                                      # Stop/exit the container
     docker images        # List all images
     ```
 
+---
+
 ## Accessing `JupyterLab`
 
 1. Open the link similar to
@@ -263,6 +344,8 @@ exit                                      # Stop/exit the container
 **Warning:** `Changes made inside the container layer are ephemeral` — they will be lost when the container is rebuilt or restarted. 
 :::
 
+---
+
 ## `host:container` port mapping
 
 ```bash
@@ -270,6 +353,8 @@ docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
 ```
 
 ![](/images/portmapping.drawio.png){height=60% fig-align="center" target="https://k21academy.com/wp-content/uploads/2020/11/portmapping.drawio.png"}
+
+---
 
 ## Stopping Containers
 
@@ -283,6 +368,8 @@ docker run -it -p 8888:8888 venustiano/fdvcw:27-12-25
   docker stop <container_name>  # Stop a running container
   docker ps                     # Verify the container has stopped
   ```
+
+---
 
 ## Restarting or removing a container
 
@@ -302,6 +389,8 @@ docker rm eca4aa01751c
 # eca4aa01751c
 ```
 
+---
+
 ## Removing Containers and Images
 
 ```bash
@@ -315,11 +404,17 @@ docker rmi <image_name>       # Remove an image by name
 
 - Remove all the `fdvcw` containers
 
+---
+
 # Volumes
+
+---
 
 ## Persistent storage (volumes)
 
 ![](/images/docker-storage.png){width=500px fig-align="center" target="https://iamachs.com/images/posts/docker/part-5-understanding-docker-storage-and-volumes/docker-storage.png"}
+
+---
 
 ## What are Bind Mounts? {.smaller}
 
@@ -330,6 +425,8 @@ docker rmi <image_name>       # Remove an image by name
 
 - Bind mounts map a file or directory from the host into a container.
 - Changes on the host are reflected in the container and vice versa.
+
+---
 
 ## Host vs. Container filesystems
 
@@ -345,7 +442,11 @@ Container
 :::
 ::::
 
+---
+
 ## How to use Bind Mounts
+
+
 
 ::: {.panel-tabset}
 #### Linux (bash)
@@ -382,6 +483,8 @@ docker run -it -p 8888:8888 ^
 - Docker mounts the host path into the container path at runtime.
 - Changes on the host are reflected in the container and vice versa.
 
+---
+
 ## Store 100 numpy exercises
 
 1. Once in JupyterLab, open a terminal and run:
@@ -396,7 +499,11 @@ pip install mdutils
 3. Have some fun!
 4. In the menu, click on `File` then on `Shut Down` to stop the server.
 
+---
+
 # Docker Images
+
+---
 
 ## Creating images {.smaller}
 
@@ -419,6 +526,8 @@ pip install mdutils
 :::
 ::::
 
+---
+
 ## Building an image from a container
 
 ```bash
@@ -433,6 +542,8 @@ docker ps -a
 # Create the image, replace the text between <> 
 docker commit <CONTAINER_ID_or_NAME> myfdvimage:mdutils
 ```
+
+---
 
 ## Building an image using a Dockerfile
 
@@ -452,6 +563,8 @@ docker commit <CONTAINER_ID_or_NAME> myfdvimage:mdutils
 ::: aside
 Make sure you are in the `cowsay` folder before running the command
 :::
+
+---
 
 ## A `Dockerfile` for our environment {.smaller}
 
@@ -490,6 +603,8 @@ docker build --platform linux/amd64 -t fdvcw:20-01-2026 .
 
 :::
 
+---
+
 ## Using a `requirements.txt` file {.smaller}
 
 ```bash
@@ -514,6 +629,8 @@ RUN pip install --no-cache-dir --requirement /tmp/requirements.txt && \
 
 Create the `Dockerfile` and `requirements.txt` to build an image, see next slide.
 
+---
+
 ## Building an image from a `Dockerfile`
 
 ```bash
@@ -527,6 +644,8 @@ docker build -f ./path/to/Dockerfile -t myrepo/myimage:1.0 ./path/to/context
 - `-f`: specify the Dockerfile path to use. 
 - `-t`: tag the built image (`name[:tag]`).
 - `context`: the directory sent to the builder (last argument), — Docker sends the entire context to the daemon, so `keep it minimal`.
+
+---
 
 ## Build the image
 
@@ -550,12 +669,17 @@ docker run -it -p 10000:8888 venustiano/fdvcw:19-01-2026    #<4>
 
 4. `-p 10000:8888`: Makes sure the port is mapped to the port `10000` in case `8888` is already in use.
 
+---
+
 ## Removing the container automatically
 ```bash
 docker run --rm -it -p 8888:8888 \                  # <1>
   -v $(pwd):/home/jovyan/bind_folder venustiano/fdvcw:19-01-2026
 ```
 1. The `--rm` flag removes the container when the container is shutdown.
+
+
+---
 
 ## Dockerfile (common keywords) {.smaller}
 
@@ -581,16 +705,23 @@ CMD ["python", "main.py"]
 [Dockerfile reference](https://docs.docker.com/reference/dockerfile/)
 :::
 
+---
+
 ## Dockerfile vs layers
 
 ![](/images/dockerfile_layers.png){width="600px" fig-align="center"}
 
+---
 
 # Container registries
+
+---
 
 ## Understanding the container registry
 
 ![](/images/Docker-hub-registry-768.webp){width=800px fig-align="center" target="https://media.geeksforgeeks.org/wp-content/uploads/20240513153832/Docker-hub-registry-768.webp"}
+
+---
 
 ## Public Container Registries {.smaller}
 
@@ -601,6 +732,7 @@ CMD ["python", "main.py"]
 - [Amazon ECR Public](https://public.ecr.aws) — AWS public container registry.
 - [Microsoft Container Registry (MCR)](https://mcr.microsoft.com) — Microsoft-hosted container images.
 
+---
 
 ## Registry
 
@@ -610,6 +742,8 @@ CMD ["python", "main.py"]
 	- Verify trusted publishers
 	- Always use specific tags
 	- Avoid `latest` tag for reproducibility
+
+---
 
 ## Ready to use environments
 
@@ -639,6 +773,8 @@ CMD ["python", "main.py"]
 :::
 ::::
 
+---
+
 ## Dependency tree of the stack images
 
 
@@ -657,6 +793,7 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 #         http://127.0.0.1:8888/lab?token=d4ac9278f5f5388e88097a3a8ebbe9401be206cfa0b83099
 ```
 
+---
 
 ## Understanding the command
 
@@ -672,7 +809,7 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 +-- Docker command
 ```
 
-
+---
 
 ## Publish docker images
 
@@ -694,11 +831,13 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 [Build, tag and publish an image](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/)
 :::
 
-
+---
 
 ## Reproducing the book
 
 <iframe src="https://clauswilke.com/dataviz/" width="100%" height="600px"></iframe>
+
+---
 
 ## Alternatives
 
@@ -721,6 +860,8 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 
 ::::
 
+---
+
 ## A GitHub Codespace for the FDV book
 
 1. Sign in [GitHub](https://github.com/login)
@@ -733,13 +874,19 @@ docker run -it -p 8888:8888 quay.io/jupyter/scipy-notebook:2025-03-14
 Once the codespace has been created, you can open `JupyterLab` instead of `VScode` by clicking on the dots `...` and `Open in JupyterLab`
 :::
 
+---
+
 ## The Binder Workflow
 
 ![](/images/binder-comic-5aa62b109e2a7023a5abc80b4312ad31.png){width=800px fig-align="center"}
 
+---
+
 ## The BinderHub architecture
 
 ![](/images/binderhub-9e26d430c9c40fc4db6f858e376c15a9.svg){width=800px fig-align="center"}
+
+---
 
 ## Running the dataviz environment
 
@@ -757,6 +904,8 @@ Once the codespace has been created, you can open `JupyterLab` instead of `VScod
 Right click on a badge and select `Open link in new tab`.
 :::
 
+---
+
 ## {.smaller}
 To reproduce this chapter:
 
@@ -764,6 +913,8 @@ To reproduce this chapter:
 
 1. Open `visualizing_distributions_I.Rmd` in Rstudio
 2. Click on `Knit`
+
+---
 
 ## Binder Pros
 
@@ -774,6 +925,8 @@ To reproduce this chapter:
 - Free
 - Easy to start via [https://mybinder.org/](https://mybinder.org/)
 
+---
+
 ## Binder Cons
 
 - Starting the environment can be slow
@@ -782,6 +935,8 @@ To reproduce this chapter:
 - No persistent storage
 - Not reliable for big groups
 
+---
+
 ## When is Binder appropriate?
 
 - To share a reproducible environment
@@ -789,21 +944,11 @@ To reproduce this chapter:
 - When the code and associated data are publicly available
 - When the code you want to run does not require a lot of resources
 
-# Containers in more detail
-
-## Container architecture
-
-::: columns
-::: column
-![](/images/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today-1110x919.png){width=100%}
-:::
-::: column
-![](/images/container-what-is-container-1110x961.png){ width=800px fig-align="center" target="https://www.docker.com/app/uploads/2021/11/container-what-is-container-1110x961.png" }
-:::
-:::
-
+---
 
 # Running containers in the cloud
+
+---
 
 ## Binder
 
@@ -821,6 +966,8 @@ The badge below opens the FDV environment on the RUG Binder platform:
 
 - [![Launch RUG Binder](https://img.shields.io/badge/launch%20-rug%20binder-009CEF?logo=jupyter)](https://binderhub.app.rug.nl/v2/gh/Venustiano/datavizclaus/HEAD)
 :::
+
+---
 
 ## GitHub codespaces {.smaller}
 
@@ -840,7 +987,7 @@ Resources
 - [Introduction to GitHub Codespaces](https://www.datacamp.com/tutorial/github-codespaces)
 :::
 
-
+---
 
 ## Running FDV in codespaces
 
@@ -848,14 +995,19 @@ Resources
 
 [https://github.com/Venustiano/datavizclaus/tree/fdvcwcontainer](https://github.com/Venustiano/datavizclaus/tree/fdvcwcontainer)
 
+---
+
 ## GitHub Benefits
 
 - [GitHub Student Developer Pack](https://education.github.com/pack)
 - [Students - GitHub Education](https://github.com/education/students)
 - [Teachers - GitHub Education](https://github.com/education/teachers)
 
+---
 
 # Containers in HPC (advanced)
+
+---
 
 ## Apptainers
 
