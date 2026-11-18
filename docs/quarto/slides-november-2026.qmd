@@ -544,16 +544,16 @@ pip install mdutils
 
 ---
 
-## 
+## Rocker
 
-![](images/rocker_docker_downloads.png)
+![](images/rocker_docker_downloads.png){width="600px" fig-align="center"}
 
 
 ---
 
-## 
+## Jupyter
 
-![](images/jupyter_docker_stacks_popularity.png)
+![](images/jupyter_docker_stacks_popularity.png){width="600px" fig-align="center"}
 
 ---
 
@@ -654,13 +654,13 @@ Create the `Dockerfile` and folder to build the image
 #### Linux/Windows
 
 ```bash
-docker build -t fdvcw:20-01-2026 .
+docker build -t fdvcw:20-11-2026 .
 ```
 
 #### macOS (arm)
 
 ```bash
-docker build --platform linux/amd64 -t fdvcw:20-01-2026 .
+docker build --platform linux/amd64 -t fdvcw:20-11-2026 .
 ```
 :::
 
@@ -718,14 +718,14 @@ ls -l
 
 # 2. Run the command
 # on arm architecture
-# docker build --platform linux/amd64 -t fdvcw:20-01-2026 .
-docker build -t fdvcw:19-01-2026 .
+# docker build --platform linux/amd64 -t fdvcw:20-11-2026 .
+docker build -t fdvcw:20-11-2026 .
 
 # 3. Wait and list the images
 docker images
 
 # 4. Run the container (optional)
-docker run -it -p 10000:8888 venustiano/fdvcw:19-01-2026    #<4>
+docker run -it -p 10000:8888 venustiano/fdvcw:20-11-2026    #<4>
 
 # 5. Access JupyterLab, make sure you use port 10000 in the url
 ```
@@ -737,7 +737,7 @@ docker run -it -p 10000:8888 venustiano/fdvcw:19-01-2026    #<4>
 ## Removing the container automatically
 ```bash
 docker run --rm -it -p 8888:8888 \                  # <1>
-  -v $(pwd):/home/jovyan/bind_folder venustiano/fdvcw:19-01-2026
+  -v $(pwd):/home/jovyan/bind_folder venustiano/fdvcw:20-11-2026
 ```
 1. The `--rm` flag removes the container when the container is shutdown.
 
