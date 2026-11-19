@@ -9,8 +9,6 @@ date: "November 2026"
 date-format: "MMMM YYYY"
 format:
   revealjs:
-    mermaid:
-      theme: default
     logo: images/dcc_logo2.png
     view-distance: 3
     mobile-view-distance: 2
@@ -36,13 +34,17 @@ format:
 
 ---
 
-## Goal
+## Computational reproducibility 
+
+<br><br>
 
 Computational reproducibility means that research results obtained through computation can be consistently **re-produced** by others given the same inputs and methods.
 
 ---
 
 ## The Pillars
+
+<br><br>
 
 - Code
 - Data
@@ -55,6 +57,8 @@ Computational reproducibility means that research results obtained through compu
 
 ## The Challenges of reproducibility
 
+<br><br>
+
 - Software rot
 - Data availability
 - Complexity
@@ -63,6 +67,8 @@ Computational reproducibility means that research results obtained through compu
 ---
 
 ## Benefits of Reproducible Research
+
+<br>
 
 1. Integrity and trust
 2. **Efficiency and reuse**
@@ -511,7 +517,7 @@ pip install mdutils
 4. In the menu, click on `File` then on `Shut Down` to stop the server.
 
 
-# Docker Images
+# Out-of-the-Box Data Science Environments {.center}
 
 --- 
 
@@ -562,6 +568,8 @@ pip install mdutils
 
 ![](/images/inherit.svg){width=1200px fig-align="center" target="https://raw.githubusercontent.com/jupyter/docker-stacks/refs/heads/main/docs/images/inherit.svg"}
 
+
+# Building Docker Images {.center}
 
 ---
 
