@@ -143,13 +143,13 @@ Run an AI agent inside a container with access only to a designated project dire
 
 <br>
 
-| Core objects | Supporting services |
+| **Core objects** | **Supporting services** |
 | --- | --- |
-| - **Images** | - **Volumes** |
-| - **Containers** | - **Registries** |
-| - **Dockerfile** | - **Docker Hub** |
-| - **Ports** | - **Networking** |
-| - **etc.** | - **Docker daemon** |
+| - `Images` | - `Volumes` |
+| - `Containers` | - `Registries` |
+| - `Dockerfile` | - `Docker Hub` |
+| - `Ports` | - `Networking` |
+| - `etc.` | - `Docker daemon` |
 
 
 <!-- ## Installing Docker (macOS, Linux, Windows)
