@@ -22,6 +22,7 @@ Explore the resources to learn how to make your research transparent, repeatable
 ### GitHub Pages
 
 - [Workshop slides, January 2026](https://ug-team-data-science.github.io/computational-reproducibility/)
+
 - [Workshop slides, November 2026](https://ug-team-data-science.github.io/computational-reproducibility/slides-november-2026.html)
 
 ### GitLab Pages
@@ -31,6 +32,8 @@ Explore the resources to learn how to make your research transparent, repeatable
   <img src="https://user-images.githubusercontent.com/1769619/195922332-4308bb3c-ccfd-47e6-b6a6-f48b94c22fcf.svg" height="18" alt="Quarto Logo"/>
   <span style="font-size:14px; position:relative; top:-3px;">Workshop slides, January 2026</span>
 </a>
+
+<br>
 
 <a href="https://gitpages.service.rug.nl/dcc/training/computational-reproducibility/slides-november-2026.html">
   <img src="https://user-images.githubusercontent.com/1769619/195922332-4308bb3c-ccfd-47e6-b6a6-f48b94c22fcf.svg" height="18" alt="Quarto Logo"/>
